@@ -1,18 +1,22 @@
 import React from "react";
-
+import Link from "next/link";
 const Sidebar = () => {
   return (
     <div className="w-full flex flex-wrap">
-      <div className="w-full md:w-[20vw] h-[100vh] bg-danger p-3 ">
+      <div className="w-full md:w-[20vw] h-[100vh] shadow p-3 ">
         <div className="w-full flex gap-4 h-[10vh]">
           <i className="bi bi-person-circle"></i>
           <h5>Profile</h5>
         </div>
         <div>
           <ul className="text-break list-none m-0 p-0 space-y-5">
-            <li className="flex gap-3">
-              <i className="bi bi-search"></i>
-              Search jobs
+            <li className="">
+              <Link href="/searchJobs"
+               className="flex gap-3 text-decoration-none text-reset"
+              >
+                <i className="bi bi-search"></i>
+                Search jobs
+              </Link>
             </li>
             <li className="flex gap-3">
               <i className="bi bi-briefcase"></i>
