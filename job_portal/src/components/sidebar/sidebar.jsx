@@ -10,9 +10,10 @@ const Sidebar = () => {
         </div>
         <div>
           <ul className="text-break list-none m-0 p-0 space-y-5">
-            <li className="">
-              <Link href="/searchJobs"
-               className="flex gap-3 text-decoration-none text-reset"
+            <li>
+              <Link
+                href="/searchJobs"
+                className="flex gap-3 text-decoration-none text-reset"
               >
                 <i className="bi bi-search"></i>
                 Search jobs
@@ -22,8 +23,13 @@ const Sidebar = () => {
               <i className="bi bi-briefcase"></i>
               Recommmended jobs
             </li>
-            <li className="flex gap-3">
-              <i className="bi bi-bookmark"></i>Saved jobs
+            <li>
+              <Link
+                href=""
+                className="flex gap-3 text-decoration-none text-reset"
+              >
+                <i className="bi bi-bookmark"></i>Saved jobs
+              </Link>
             </li>
             <li className="flex gap-3">
               <i className="bi bi-bar-chart-line"></i>Profile performance

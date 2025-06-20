@@ -1,6 +1,13 @@
-import React from "react";
+"use client";
 
+import React from "react";
+import { useRouter } from 'next/navigation'
 const Navabar = () => {
+  const router=useRouter()
+
+  const handleSearch=()=>{
+    router.push('/searchJobs')
+  }
   return (
     <div className="bg-dark text-white p-3 flex justify-between items-center whitespace-nowrap w-max  min-w-full gap-3 py-2">
       <div><h4>
@@ -11,7 +18,7 @@ const Navabar = () => {
         <li>Services</li>
       </ul>
       <div className="relative">
-        <input type="text" placeholder="search job here " className="w-full border rounded-3 outline-none text-center py-1" />
+        <input type="text" placeholder="search job here " className="w-full border rounded-3 outline-none text-center py-1" onClick={handleSearch} />
         <i className="bi bi-search right-2 position-absolute top-1/2 transform -translate-y-1/2"></i>
       </div>
       <div className="flex gap-3">

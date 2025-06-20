@@ -1,8 +1,8 @@
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Navabar from "@/components/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
+import Navabar from "@/components/navbar/navbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,13 +12,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="w-screen h-screen overflow-x-auto ">
-        <Navabar />
+      <body className="w-full h-screen overflow-x-auto ">
+       <Navabar/>
         <div className="flex">
           <div>
             <Sidebar />
           </div>
-          <main className="p-6 inline-block align-top">{children}</main>
+          <main className="w-full">{children}</main>
         </div>
       </body>
     </html>
