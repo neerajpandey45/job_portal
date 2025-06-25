@@ -1,18 +1,22 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
-const Sidebar = () => {
+const Sidebar = ({setOpenSide}) => {
   return (
     <div className="w-full flex flex-wrap">
-      <div className="w-full md:w-[20vw] h-[100vh] shadow p-3 ">
+      <div className="w-full md:w-[20vw] min-h-[100vh] shadow p-3 ">
         <div className="w-full flex gap-4 h-[10vh]">
           <i className="bi bi-person-circle"></i>
           <h5>Profile</h5>
+          <div className="md:hidden flex justify-end w-full text-danger">
+            <i className="bi bi-x-circle-fill" onClick={()=>setOpenSide(false)}></i>
+          </div>
         </div>
         <div>
           <ul className="text-break list-none m-0 p-0 space-y-5">
             <li>
               <Link
-                href="/searchJobs"
+                href="/user/search"
                 className="flex gap-3 text-decoration-none text-reset"
               >
                 <i className="bi bi-search"></i>

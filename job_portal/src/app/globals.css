@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  ::-ms-reveal{
+  display: none;
+}
 }
 
 @theme inline {

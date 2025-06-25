@@ -3,13 +3,9 @@ import React from "react";
 import { useState } from "react";
 import LocationState from "../location/page";
 const JobPage = ({onSelect}) => {
-  const [open, setOpen] = useState(false);
   const [label, setLabel] = useState(false);
   const searchBox = () => {
     setLabel(true);
-  };
-  const locationBox = () => {
-    setOpen(true);
   };
   return (
     <div className="w-full min-h-[40vh]">
