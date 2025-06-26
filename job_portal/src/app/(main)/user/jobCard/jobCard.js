@@ -10,7 +10,7 @@ const JobList = ({ name, experience, position, description }) => {
         <p>{name}</p>
       </div>
       <div className="flex gap-1">
-        <i class="bi bi-bag-dash"></i>
+        <i className="bi bi-bag-dash"></i>
         <p> {experience}</p>
       </div>
       <div>

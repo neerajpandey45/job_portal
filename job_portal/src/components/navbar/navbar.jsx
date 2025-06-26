@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./navbar.module.css";
 import Jobs from "../jobs/jobs";
 import Companies from "../companies/companies";
 import Services from "../services/services";
@@ -10,7 +9,7 @@ const Navabar = ({onToggleSidebar}) => {
   const router = useRouter();
   const handleSearch = () => {
     router.push("/user/search");
-  };
+  }
   const ref = useRef();
   useEffect(() => {
     const close = (e) => {
@@ -18,7 +17,6 @@ const Navabar = ({onToggleSidebar}) => {
         setOpenMenu("");
       }
     };
-
     document.addEventListener("click", close);
     return () => document.removeEventListener("click", close);
   }, []);

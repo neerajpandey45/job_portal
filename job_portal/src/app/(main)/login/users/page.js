@@ -23,15 +23,15 @@ const UsersLogin = () => {
       toast.success("Login successful!");
       router.push("/user/homepage");
     } catch (err) {
-      if(err.response?.status===404){
-    toast.error("User not found. Redirecting to register...");
-      setTimeout(() => {
-        router.push("/registration/user");
-      }, 1000); // Delay to let the toast show
-      }else if(err.response?.status===400){
-        toast.error("invalid Creadentials")
-      }else{
-        toast.error("something went wrong")
+      if (err.response?.status === 404) {
+        toast.error("User not found. Redirecting to register...");
+        setTimeout(() => {
+          router.push("/registration/user");
+        }, 1000); // Delay to let the toast show
+      } else if (err.response?.status === 400) {
+        toast.error("invalid Creadentials");
+      } else {
+        toast.error("something went wrong");
       }
       setError(err.response?.data?.error || "Login failed");
     }
@@ -45,9 +45,10 @@ const UsersLogin = () => {
             <h2 className="text-center mb-4">Login</h2>
             <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
               <div>
+                <label>Username/email</label>
                 <input
                   type="email"
-                  placeholder="Enter email"
+                  placeholder="example@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full border border-black rounded-3 px-3 h-[30px]"
@@ -55,6 +56,7 @@ const UsersLogin = () => {
                 />
               </div>
               <div>
+                <label>Password</label>
                 <input
                   type={showPass ? "text" : "password"}
                   placeholder="Enter password"
@@ -70,10 +72,11 @@ const UsersLogin = () => {
                   onClick={() => setShowPass(!showPass)}
                 ></i>
               </div>
-              <div className="w-full flex justify-center">
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
+              <div>
+                <div className="flex justify-end gap-5">
+                  <button className="btn btn-primary">Submit</button>
+                  <p className="flex justify-end text-blue-600 cursor-pointer">forgot password ?</p>
+                </div>
               </div>
             </form>
           </div>

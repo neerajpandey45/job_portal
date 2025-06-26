@@ -15,15 +15,15 @@ export default function Home() {
     router.push("/login/recruiter");
   };
   return (
-    <div className="w-full">
+    <div className="full w-max min-w-full">
       <div className="flex justify-between px-4 py-2 bg-gray-800 text-white">
         <div className="flex gap-5">
           <p className="cursor-pointer" onClick={handleAdmin}>
             Adminlogin
           </p>
-          <p>About</p>
+          <p className="cursor-pointer">About</p>
         </div>
-        <div className="flex gap-5">
+        <div className="flex gap-3">
           <div className="flex gap-1">
             <button
               className="btn btn-primary btn-sm border rounded-5 w-[80px]"
@@ -31,13 +31,14 @@ export default function Home() {
             >
               login
             </button>
-            <button className="btn btn-danger border rounded-5" onClick={()=>router.push("/registration/user")}>
+            <button
+              className="btn btn-danger border rounded-5"
+              onClick={() => router.push("/registration/user")}
+            >
               register
             </button>
           </div>
-          <p className="cursor-pointer" onClick={handleRecruiter}>
-            recruiter
-          </p>
+          <button className="btn btn-success btn-sm border rounded-5 w-[80px]" onClick={handleRecruiter}>recruiter</button>
         </div>
       </div>
       <MainPage/>
