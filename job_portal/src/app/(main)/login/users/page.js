@@ -21,7 +21,7 @@ const UsersLogin = () => {
       Cookies.set("token", res.data.token, { expires: 1 / 24 }); // 1 hour
       // Navigate to homepage
       toast.success("Login successful!");
-      router.push("/user/homepage");
+      router.push("/userDashboard/homepage");
     } catch (err) {
       if (err.response?.status === 404) {
         toast.error("User not found. Redirecting to register...");
@@ -37,7 +37,7 @@ const UsersLogin = () => {
     }
   };
 
-  return (
+  return (      
     <div className="container mt-5 flex justify-center items-center ">
       <div className="row w-full justify-center">
         <div className="col-12 col-md-4 col-lg-4">

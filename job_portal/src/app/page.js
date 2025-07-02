@@ -2,7 +2,6 @@
 import MainPage from "@/module/homePage/mainPage";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
 export default function Home() {
   const router = useRouter();
   const handleUser = () => {
@@ -13,6 +12,7 @@ export default function Home() {
   };
   const handleRecruiter = () => {
     router.push("/login/recruiter");
+
   };
   return (
     <div className="full w-max min-w-full">

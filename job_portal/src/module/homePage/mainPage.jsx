@@ -1,6 +1,9 @@
+// "use client";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const MainPage = () => {
+  const router=useRouter();
   return (
     <div className="w-full flex flex-col flex-wrap">
       <h3 className="text-center p-3">this is Home page</h3>

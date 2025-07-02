@@ -28,7 +28,6 @@ const UserRegistration = () => {
       setError("Please enter a valid email address.");
       return;
     }
-
     try {
       const res = await axios.post("http://localhost:5000/api/users/register", {
       firstName: formData.firstName,
@@ -36,7 +35,7 @@ const UserRegistration = () => {
   email: formData.username,
   password: formData.password,
       });
-
+      
       setSuccess("User registered successfully!");
       setFormData({
         firstName: "",
@@ -63,7 +62,7 @@ const UserRegistration = () => {
           className="flex flex-col gap-4 md:w-[30%] min-h-[50vh] justify-center items-center shadow bg-white py-3 px-4 rounded-lg"
           onSubmit={handleSubmit}
         >
-          <h2 className="text-xl font-bold">Register</h2>
+          <h2 className="text-xl font-bold">User Registration</h2>
 
           <div className="w-full">
             <label>First Name</label>
