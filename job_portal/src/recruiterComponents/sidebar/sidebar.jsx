@@ -7,9 +7,9 @@ const RecruiterSidebar = () => {
     <div className="w-[20vw] h-screen bg-warning ">
    <div className="mt-10">
        <ul className="space-y-5 cursor-pointer">
-        <li onClick={()=>router.push("/recruiterHomepage/profile")}>Profile</li>
-        <li>Dashboard</li>
-        <li>All posted jobs</li>
+        <li onClick={()=>router.push("/recruiterHomepage/jobform")}>Upoad job</li>
+        <li onClick={()=>router.push("/recruiterHomepage/dashboard")}>Dashboard</li>
+        <li onClick={()=>router.push("/recruiterHomepage/jobcard")}>All posted jobs</li>
         <li>Total applicatons</li>
         <li>Veiw Appllications</li>
       </ul>

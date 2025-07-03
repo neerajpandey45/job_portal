@@ -1,7 +1,10 @@
-export default function HomePage(){
+
+export default function Profile(){
     return (
         <div>
-            <h3>this is homepage</h3>
+            <h2>
+                {/* this is profile section: */}
+            </h2>
         </div>
     )
 }

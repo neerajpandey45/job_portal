@@ -9,28 +9,27 @@ export default function Recruiter() {
   const [password, setPassword] = useState("");
   const [err, setError] = useState("");
   const handle = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/api/recruiters/login",
-        {
-          email,
-          password,
-        }
-      );
-      toast.success("login successffully");
-       router.push("/recruiterHomepage")
-    } catch (err) {
-      if (err.response?.status === 404) {
-        toast.error("user not found");
-      } else if (err.response?.status === 400) {
-        toast.error("invalid Creadentials");
-      } else {
-        toast.error("something went wrong");
-      }
-      setError(err.response?.data?.error || "Login failed");
+  e.preventDefault();
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/recruiters/login",
+      { email, password }, // ✅ request body
+      { withCredentials: true } // ✅ request config (separate)
+    );
+    toast.success("Login successfully");
+    router.push("/recruiterHomepage");
+  } catch (err) {
+    if (err.response?.status === 404) {
+      toast.error("User not found");
+    } else if (err.response?.status === 400) {
+      toast.error("Invalid credentials");
+    } else {
+      toast.error("Something went wrong");
     }
-  };
+    setError(err.response?.data?.error || "Login failed");
+  }
+};
+
   return (
     <div className="flex flex-col">
       <div>
@@ -67,9 +66,9 @@ export default function Recruiter() {
             <div className="flex justify-center">
               <button className="btn btn-primary">Login</button>
             </div>
-            </form>
-            <p className="text-center">Don't have any account?</p>
-      
+          </form>
+          <p className="text-center">Don't have any account?</p>
+
           <div className="flex justify-center mb-4">
             <button
               className=" btn btn-danger btn-sm"
