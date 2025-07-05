@@ -41,26 +41,39 @@ exports.createUser = async (req, res) => {
     res.status(500).json({error:"server error"})
  }
 };
-
 exports.loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
+  const user = await User.findOne({ email});
+  if (!user) return res.status(404).json({ error: "User not found" });
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
+  // Create token
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+  // ✅ Set token in HTTP-only cookie
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: false, // true in production with https
+    sameSite: "lax",//lax
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 
-    // Find user by email
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ error: "Invalid email or password" });
-
-    // Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ error: "Invalid email or password" });
-
-    // Create token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-   return res.status(200).json({ message: "Login successful", token });
-    // res.json({ message: "Login successful", token });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  return res.status(200).json({
+    message: "Login successful",
+    user: {
+      id: user._id,
+      email: user.email,
+    },
+  });
 };
+
+exports.logoutUser=(req,res)=>{
+  res.clearCookie("token", {
+  httpOnly: true,
+  sameSite: "Lax",
+  secure: false, // set to true in production (https)
+});
+res.status(200).json({ msg: "logout" });
+}
+

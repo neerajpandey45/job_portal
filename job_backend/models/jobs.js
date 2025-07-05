@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
 
 const jobSchema = new mongoose.Schema({
-  title: String,
+ title: String,
+  companyName: String,
+  jobType: String,
   location: String,
   experience: String,
-  skills: String,
+  salary: String,
+  skills:String,
+  openings: Number,
   description: String,
-  jobType: String,
+  fullDescriptions: String,
   recruiterId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Recruiter",

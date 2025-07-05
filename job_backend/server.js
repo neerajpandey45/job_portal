@@ -6,6 +6,7 @@ const { connectMongoDB } = require("./connection");
 const userRouter = require("./routes/user");
 const recruiterRoute=require("./routes/recruiter");
 const jobRoute=require("./routes/jobPost");
+const allJobsRoutes=require("./routes/allJob");
 const cookieParser=require("cookie-parser");
 dotenv.config();
 const app = express();
@@ -22,7 +23,7 @@ app.use(cookieParser());
 app.use("/api/users", userRouter);
 app.use("/api/recruiters",recruiterRoute);
 app.use("/api/jobs",jobRoute);
-
+app.use("/api/alljobs",allJobsRoutes);
 // Connect DB and Start Server
 connectMongoDB(process.env.MONGO_URI).then(() => {
   app.listen(PORT, () => {

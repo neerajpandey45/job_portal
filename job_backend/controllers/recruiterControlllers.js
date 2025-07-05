@@ -103,3 +103,11 @@ exports.loginRecruiter = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+exports.logoutRecruiter=async(req,res)=>{
+  res.clearCookie("token", {
+  httpOnly: true,
+  sameSite: "Lax",
+  secure: false, // set to true in production (https)
+});
+res.status(200).json({msg:"logout successfully"});
+}
