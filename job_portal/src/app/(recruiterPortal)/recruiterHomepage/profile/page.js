@@ -4,7 +4,6 @@ import axios from "axios";
 const RecruiterProfile = () => {
   const [recruiter, setRecruiter] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -18,7 +17,6 @@ const RecruiterProfile = () => {
         setLoading(false);
       }
     };
-
     fetchProfile();
   }, []);
 

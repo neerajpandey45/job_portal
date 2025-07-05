@@ -5,25 +5,47 @@ import { useRouter } from "next/navigation";
  import Navabar from "@/components/navbar/navbar";
 import Footer from "@/module/footer/footer";
 import Cookies from "js-cookie";
-const LayoutClient = ({ children }) => {
+import axios from "axios";
+const UserLayout = ({ children }) => {
   const [authenticate,setAuthenticate]=useState(null);
   const [isOpenSide, setIsOpenSide] = useState(false);
   const router=useRouter();
   const toggleSidebar = () => {
     setIsOpenSide(!isOpenSide);
   };
-  useEffect(()=>{
-    const token=Cookies.get("token");
-    // const token = sessionStorage.getItem("token");
-    if(!token){
-      router.replace("/login/users")
-      setAuthenticate(false)
-    }
-    else{
-      setAuthenticate(true);
-    }
-  },[router])
-  if (!authenticate) return null; // Don't show layout while checking
+      useEffect(() => {
+    const checkAuth = () => {
+      setTimeout(async () => {
+        try {
+          const res = await axios.get("http://localhost:5000/api/users/check", {
+            withCredentials: true,
+          });
+          if (res.status === 200 && res.data.authenticated) {
+            setAuthenticate(true);
+          } else {
+            setAuthenticate(false);
+            router.replace("/login/users");
+          }
+        } catch (err) {
+          setAuthenticate(false);
+          router.replace("/login/users");
+        }
+      }, 200); // Delay to ensure cookie exists
+    };
+
+    checkAuth();
+  }, [router]);
+
+  // Block rendering while auth check runs
+  if (!authenticate) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+        <p className="ml-4 text-lg">Checking login...</p>
+      </div>
+    );
+  }
+
   return (
    <div className="flex flex-col h-screen overflow-x-auto">
         <Navabar onToggleSidebar={toggleSidebar} />
@@ -37,7 +59,7 @@ const LayoutClient = ({ children }) => {
             <Sidebar setOpenSide={setIsOpenSide} />
           </div>
         )}
-        <main className="w-full">{children}</main>
+        <main className="w-full overflow-y-scroll" style={{scrollbarWidth:"none"}}>{children}</main>
       </div>
       <div className=" md:hidden ">
         <Footer />
@@ -46,4 +68,4 @@ const LayoutClient = ({ children }) => {
   );
 };
 
-export default LayoutClient;
+export default UserLayout;

@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import Cookies from "js-cookie";
 const UsersLogin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -16,29 +15,29 @@ const UsersLogin = () => {
       const res = await axios.post("http://localhost:5000/api/users/login", {
         email,
         password,
-      });
-      // Save token to cookie
-      Cookies.set("token", res.data.token, { expires: 1 / 24 }); // 1 hour
-      // Navigate to homepage
+      },{
+  withCredentials: true,
+}
+    );
       toast.success("Login successful!");
-      router.push("/userDashboard/homepage");
+      router.push("/userHomepage");
     } catch (err) {
       if (err.response?.status === 404) {
-        toast.error("User not found. Redirecting to register...");
+        toast.error("User not found.");
         setTimeout(() => {
           router.push("/registration/user");
         }, 1000); // Delay to let the toast show
       } else if (err.response?.status === 400) {
-        toast.error("invalid Creadentials");
+        toast.error(" invalid Creadentials");
       } else {
         toast.error("something went wrong");
       }
       setError(err.response?.data?.error || "Login failed");
     }
   };
-
   return (      
-    <div className="container mt-5 flex justify-center items-center ">
+
+    <div className="container-fluid flex justify-center min-h-screen items-center bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-400 ">
       <div className="row w-full justify-center">
         <div className="col-12 col-md-4 col-lg-4">
           <div className="card shadow p-4">
@@ -82,7 +81,8 @@ const UsersLogin = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+   
   );
 };
 

@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-const Sidebar = ({setOpenSide}) => {
+const Sidebar = ({ setOpenSide }) => {
+  const [openMenu, setOpenMenu] = useState(false);
   return (
     <div className="w-full flex flex-wrap">
       <div className="w-full md:w-[20vw] min-h-[100vh] shadow p-3 ">
@@ -9,14 +10,17 @@ const Sidebar = ({setOpenSide}) => {
           <i className="bi bi-person-circle"></i>
           <h5>Profile</h5>
           <div className="md:hidden flex justify-end w-full text-danger">
-            <i className="bi bi-x-circle-fill" onClick={()=>setOpenSide(false)}></i>
+            <i
+              className="bi bi-x-circle-fill"
+              onClick={() => setOpenSide(false)}
+            ></i>
           </div>
         </div>
         <div>
           <ul className="text-break list-none m-0 p-0 space-y-5">
             <li>
               <Link
-                href="/user/search"
+                href="/userHomepage/search"
                 className="flex gap-3 text-decoration-none text-reset"
               >
                 <i className="bi bi-search"></i>
@@ -42,9 +46,6 @@ const Sidebar = ({setOpenSide}) => {
               <i className="bi bi-eye"></i>Display prefrences
             </li>
             <li className="flex gap-3">
-              <i className="bi bi-gear"></i>setting
-            </li>
-            <li className="flex gap-3">
               <i className="bi bi-duffle"></i>Jobseeker services
             </li>
             <li className="flex gap-3">
@@ -56,6 +57,24 @@ const Sidebar = ({setOpenSide}) => {
             <li className="flex gap-3">
               <i className="bo bi-info-circle"></i>About us
             </li>
+            <div className="">
+              <li
+                className="flex gap-3 items-center cursor-pointer"
+                onClick={() => setOpenMenu(!openMenu)}
+              >
+                <i className="bi bi-gear"></i> Settings
+              </li>
+              {openMenu && (
+                <ul className="cursor-pointer mt-2 space-y-3">
+                 <Link href="/userHomepage/logoutUser">
+                  <li>Logout</li>
+                 </Link>
+                  <li>
+                    Deactivate
+                  </li>
+                </ul>
+              )}
+            </div>
           </ul>
         </div>
       </div>

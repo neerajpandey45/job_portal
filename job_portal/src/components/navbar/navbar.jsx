@@ -6,9 +6,10 @@ import Companies from "../companies/companies";
 import Services from "../services/services";
 const Navabar = ({onToggleSidebar}) => {
   const [openMenu, setOpenMenu] = useState(false);
+
   const router = useRouter();
   const handleSearch = () => {
-    router.push("/user/search");
+    router.push("/userHomepage/search");
   }
   const ref = useRef();
   useEffect(() => {
@@ -55,7 +56,7 @@ const Navabar = ({onToggleSidebar}) => {
         <div className="hidden md:flex gap-2 border rounded-5 py-1 px-3 ">
           <i className="bi bi-list"></i>
           <div>
-            <i className="bi bi-person"></i>
+            <i className="bi bi-person" onClick={()=>router.push("/userHomepage/profile")}></i>
           </div>
         </div>
       </div>
