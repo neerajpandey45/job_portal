@@ -3,10 +3,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const { connectMongoDB } = require("./connection");
-const userRouter = require("./routes/user");
-const recruiterRoute=require("./routes/recruiter");
-const jobRoute=require("./routes/jobPost");
-const allJobsRoutes=require("./routes/allJob");
+const userRouter = require("./routes/users/user");
+const recruiterRoute=require("./routes/recruiters/recruiter");
+const jobRoute=require("./routes/jobPost/jobPost");
+const allJobsRoutes=require("./routes/allJobs/allJob");
+const appliedJobRoutes=require("./routes/appliedJob/appliedJob");
 const cookieParser=require("cookie-parser");
 dotenv.config();
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/users", userRouter);
 app.use("/api/recruiters",recruiterRoute);
 app.use("/api/jobs",jobRoute);
 app.use("/api/alljobs",allJobsRoutes);
+app.use("/api/applied-jobs",appliedJobRoutes);
 // Connect DB and Start Server
 connectMongoDB(process.env.MONGO_URI).then(() => {
   app.listen(PORT, () => {

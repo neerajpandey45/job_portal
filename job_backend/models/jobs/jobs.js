@@ -16,6 +16,7 @@ const jobSchema = new mongoose.Schema({
     ref: "Recruiter",
     required: true,
   },
-});
+  
+}, {timestamps:true});
 
 module.exports = mongoose.model("Job", jobSchema);

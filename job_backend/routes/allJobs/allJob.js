@@ -1,7 +1,7 @@
 // routes/jobRoutes.js
 const express = require("express");
 const router = express.Router();
-const Job = require("../models/jobs");
+const Job = require("../../models/jobs/jobs");
 // GET all jobs
 router.get("/jobs", async (req, res) => {
   try {

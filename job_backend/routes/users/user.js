@@ -1,9 +1,9 @@
 // routes/user.js
-const User = require("../models/user");
+const User = require("../../models/users/user");
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/userControllers");
-const authenticateToken = require("../middlewares/authUsers");
+const userController = require("../../controllers/users/userControllers");
+const authenticateToken = require("../../middlewares/authUsers");
 router.get("/check", authenticateToken, (req, res) => {
   res.json({ authenticated: true, userId: req.user });
 });
