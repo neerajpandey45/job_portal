@@ -2,9 +2,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import { getRelativeTime } from "@/utils/jobdateFormat";
+import AppliedJob from "../appliedjob/page";
 const JobDetailsPage = () => {
   const { id } = useParams(); // dynamic ID from URL
   const [job, setJob] = useState(null);
+    const [showApplyForm, setShowApplyForm] = useState(false);
   useEffect(() => {
     const fetchJob = async () => {
       try {
@@ -37,9 +40,16 @@ const JobDetailsPage = () => {
               <i className="bi bi-briefcase"></i>
               <p>{job.jobType}</p>
             </div>
+            <div className="flex gap-2">
+              <i className="bi bi-clock"></i>
+               <p>{getRelativeTime(job.createdAt)}</p>
+            </div>
              <div className="w-full flex justify-end">
-            <button className="btn btn-primary w-[90px]">Apply</button>
+            <button className="btn btn-primary w-[90px]" onClick={()=>setShowApplyForm(true)}>Apply</button>
           </div>
+            {showApplyForm && (
+              <AppliedJob onClose={()=>setShowApplyForm(false)}/>
+            )}
           </div>
         </div>
       </div>

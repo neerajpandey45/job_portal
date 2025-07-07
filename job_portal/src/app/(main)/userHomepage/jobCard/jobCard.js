@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { getRelativeTime } from "@/utils/jobdateFormat";
 const JobList = ({job}) => {
   const router=useRouter();
   return (
@@ -20,24 +21,8 @@ const JobList = ({job}) => {
         <p>{job.jobType}</p>
        </div>
         <p >{job.description.slice(0, 80)}...</p>
+        <p>{getRelativeTime(job.createdAt)}</p>
       </div>
-    // <div onClick={onClick} className=" p-2 px-4 rounded-4 shadow min-h-[30vh] transition-all duration-300 mt-2justify-center">
-    //   <div className="w-[80%]">
-    //     <p>{position}</p>
-    //   </div>
-    //   <div className="flex gap-1">
-    //     <i className="bi bi-geo-alt"></i>
-    //     <p>{name}</p>
-    //   </div>
-    //   <div className="flex gap-1">
-    //     <i className="bi bi-bag-dash"></i>
-    //     <p> {experience}</p>
-    //   </div>
-    //   <div>
-    //     <p>{description}</p>
-    //   </div>
-    // </div>
-    //{ name, experience, position, description,onClick }
   );
 };
 

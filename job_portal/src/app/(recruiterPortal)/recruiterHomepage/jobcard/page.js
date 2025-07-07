@@ -21,7 +21,7 @@ const JobCard = () => {
   }, []);
 
   return (
-    <div className="w-full h-[80vh] overflow-y-scroll py-2 p-2">
+    <div className="w-full h-[80vh] overflow-y-scroll  py-2 p-2" style={{scrollbarWidth:"none"}}>
       <div className="bg-gray-700 text-white w-max px-3 ">
         <h5>Total Jobs:</h5>
         <p className="text-center">{jobs.length}</p>
@@ -34,6 +34,9 @@ const JobCard = () => {
             <li>{job.location}</li>
             <li>{job.experience}</li>
             <li>{job.description}</li>
+           <div className="w-full flex justify-end">
+              <button className="btn btn-primary px-3">Delete</button>
+            </div>
           </div>
         </div>
       ))}

@@ -1,10 +1,8 @@
-
 import React, { useState } from "react";
 import Link from "next/link";
 const Jobs = ({ isOpen, onToggle }) => {
   return (
-    <div className="relative" 
-    >
+    <div className="relative">
       <span onClick={onToggle} className="cursor-pointer">
         Jobs
       </span>
@@ -13,7 +11,9 @@ const Jobs = ({ isOpen, onToggle }) => {
           <li>
             <Link href="/userHomepage/jobCard">Recommended jobs</Link>
           </li>
-          <li>Apllied jobs</li>
+          <Link href="/userHomepage/allAppliedJobs">
+            <li>Apllied jobs</li>
+          </Link>
           <li>Recently</li>
           <li>Recommended</li>
         </ul>

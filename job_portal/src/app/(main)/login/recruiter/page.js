@@ -31,7 +31,7 @@ export default function Recruiter() {
 };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-400">
       <div>
         <h5 className="text-center py-3">This is recruiter page</h5>
       </div>
