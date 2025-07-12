@@ -13,5 +13,4 @@ const RlayoutClient = ({children}) => {
     </div>
   )
 };
-
 export default RlayoutClient;

@@ -12,6 +12,7 @@ const UserAppliedJobs = () => {
         "http://localhost:5000/api/applied-jobs/appliedAlljobs",
         { withCredentials: true }
       );
+      console.log("Fetched Applied Jobs:", res.data); // Add this
       setAppliedJobs(res.data);
     } catch (err) {
       console.error("Failed to fetch applied jobs", err);
@@ -19,15 +20,18 @@ const UserAppliedJobs = () => {
   };
     fetchAppliedJobs();
   }, []);
+
   if (appliedJobs.length === 0)
-    return <p className="text-center mt-4">You haven't applied to any jobs yet.</p>;
-  return (
+    return (
+      <p className="text-center mt-4">You haven't applied to any jobs yet.</p>
+    );
+return (
     <div className="container mt-4">
       <h4 className="mb-3">Your Applied Jobs</h4>
       <div className="row flex justify-center">
         {appliedJobs.map((application) => (
           <div key={application._id} className="col-7 mb-4">
-            <JobList job={application.jobId}/>
+               <JobList job={application.jobId || application.jobSnapshot} />
           </div>
         ))}
       </div>

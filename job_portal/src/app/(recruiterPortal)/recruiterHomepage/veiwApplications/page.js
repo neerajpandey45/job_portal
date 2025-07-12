@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-const JobCard = () => {
+import React, { useEffect, useState } from "react";
+const VeiwApplications = () => {
   const router=useRouter();
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
@@ -22,18 +21,7 @@ const JobCard = () => {
     };
     fetchJobs();
   }, []);
- // ✅ Delete handler
-  const handleDelete = async (jobId) => {
-    try {
-      const res = await axios.delete(
-        `http://localhost:5000/api/recruiter/delete/${jobId}`,
-        { withCredentials: true }
-      );
-      setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
-      toast.success("Deleted successfully");
-    } catch (err) {
-      console.log("Delete error:", err);
-    }}
+
   return (
     <div className="w-full h-[90vh] overflow-y-scroll  py-2 p-2" style={{scrollbarWidth:"none"}}>
       <div className="bg-gray-700 text-white w-max px-3 ">
@@ -50,13 +38,13 @@ const JobCard = () => {
             <li>{job.description}</li>
             {/* <li>{job.fullDescriptions}</li> */}
            <div className="w-full flex justify-end">
-              <button className="btn btn-primary px-3" onClick={()=>handleDelete(job._id)}>Delete</button>
+              <button className="btn btn-primary px-3" onClick={()=>router.push(`/recruiterHomepage/${job._id}`)} >veiw</button>
             </div>
           </div>
         </div>
       ))}
     </div>
-  );
+  )
 };
 
-export default JobCard;
+export default VeiwApplications;

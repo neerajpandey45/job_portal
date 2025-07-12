@@ -4,9 +4,10 @@ import { useRouter } from "next/navigation";
 import Jobs from "../jobs/jobs";
 import Companies from "../companies/companies";
 import Services from "../services/services";
+import UserProfile from "@/app/(main)/userHomepage/profile/page";
 const Navabar = ({onToggleSidebar}) => {
   const [openMenu, setOpenMenu] = useState(false);
-
+  const [isProfileOpen, setProfileOpen] = useState(false);
   const router = useRouter();
   const handleSearch = () => {
     router.push("/userHomepage/search");
@@ -21,8 +22,12 @@ const Navabar = ({onToggleSidebar}) => {
     document.addEventListener("click", close);
     return () => document.removeEventListener("click", close);
   }, []);
+ const toggleProfile = () => {
+    setProfileOpen(!isProfileOpen);
+  };
+
   return (
-    <div className="bg-gray-800 text-white p-3 flex justify-between items-center w-max min-w-full gap-3 py-2">
+    <div className="bg-gray-800 text-white p-3 flex justify-between items-center w-max min-w-full gap-3 py-2 cursor-pointer">
       <div className="flex">
         <i className="bi bi-list md:hidden" onClick={onToggleSidebar}></i>
         <h4 className="hidden md:block">Home</h4>
@@ -56,8 +61,9 @@ const Navabar = ({onToggleSidebar}) => {
         <div className="hidden md:flex gap-2 border rounded-5 py-1 px-3 ">
           <i className="bi bi-list"></i>
           <div>
-            <i className="bi bi-person" onClick={()=>router.push("/userHomepage/profile")}></i>
+            <i className="bi bi-person"  onClick={toggleProfile} ></i>
           </div>
+          <UserProfile isOpen={isProfileOpen} toggleProfile={toggleProfile}/>
         </div>
       </div>
     </div>

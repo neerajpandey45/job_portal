@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+
 const Sidebar = ({ setOpenSide }) => {
   const [openMenu, setOpenMenu] = useState(false);
+
   return (
-    <div className="w-full flex flex-wrap">
-      <div className="w-full md:w-[20vw] min-h-[100vh] shadow p-3 ">
+    <div className="w-full flex flex-wrap ">
+      <div className="w-full md:w-[20vw] min-h-[100vh] shadow p-3 cursor-pointer ">
         <div className="w-full flex gap-4 h-[10vh]">
           <i className="bi bi-person-circle"></i>
           <h5>Profile</h5>
@@ -52,26 +54,31 @@ const Sidebar = ({ setOpenSide }) => {
               <i className="bi bi-list-ul"></i>Naukri blog
             </li>
             <li className="flex gap-3">
-              <i className="bi bi-question-circle"></i>How naukri works
+              <i className="bi bi-question-circle"></i>How jobportal works
             </li>
-            <li className="flex gap-3">
-              <i className="bo bi-info-circle"></i>About us
+
+            <li>
+              <Link
+                href="/userHomepage/about"
+                className="flex gap-3 text-decoration-none text-reset"
+              >
+                <i className="bo bi-info-circle"></i>
+                About us
+              </Link>
             </li>
             <div className="">
               <li
-                className="flex gap-3 items-center cursor-pointer"
+                className="flex gap-3 items-center "
                 onClick={() => setOpenMenu(!openMenu)}
               >
                 <i className="bi bi-gear"></i> Settings
               </li>
               {openMenu && (
                 <ul className="cursor-pointer mt-2 space-y-3">
-                 <Link href="/userHomepage/logoutUser">
-                  <li>Logout</li>
-                 </Link>
-                  <li>
-                    Deactivate
-                  </li>
+                  <Link href="/userHomepage/logoutUser">
+                    <li>Logout</li>
+                  </Link>
+                  <li>Deactivate</li>
                 </ul>
               )}
             </div>

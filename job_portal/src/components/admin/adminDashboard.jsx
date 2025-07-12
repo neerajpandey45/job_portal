@@ -1,10 +1,35 @@
 "use client";
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import axios from "axios";
+import React, { useState,useEffect } from "react";
+import dynamic from "next/dynamic"; // Import dynamic from Next.js
+const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
 const AdminDashboard = () => {
-    const totalUsers = 1200;
-    const totalRecruiters = 150;
-    const series = [
+  const [recuiter, setRecruiter] = useState([]);
+  const [user,setUser]=useState([]);
+  useEffect(() => {
+    const fetchRecruiter = async () => {
+      try {
+        const res=await axios.get("http://localhost:5000/api/admin/allRecruiters");
+          setRecruiter(res.data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+    fetchRecruiter();
+  }, []);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res=await axios.get("http://localhost:5000/api/admin/allUsers");
+          setUser(res.data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+    fetchUsers();
+  }, []);
+  const series = [
     {
       name: "Recruiters",
       data: [10, 20, 30, 25, 35, 40],
@@ -18,64 +43,48 @@ const AdminDashboard = () => {
       data: [5, 10, 20, 15, 25, 30],
     },
   ];
-const options = {
-  chart: {
-    type: "bar",
-    zoom: { enabled: true },
-    toolbar: { show:false },
-  },
-  plotOptions: {
-    bar: {
-      borderRadius: 4,
-      columnWidth: "20%",
+  const options = {
+    chart: {
+      type: "bar",
+      zoom: { enabled: true },
+      toolbar: { show: false },
     },
-  },
-  dataLabels: { enabled: false },
-  stroke: {
-    show: true,
-    width: 2,
-    colors: ["transparent"],
-  },
-  xaxis: {
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  },
-  tooltip: {
-    shared: true,
-    intersect: false,
-  },
-  colors: ["#008FFB", "#00E396", "#FEB019"],
-  legend: {
-    position: "top",
-    horizontalAlign: "right",
-  },
-};
-//   const options = {
-//     chart: {
-//       type: "line",
-//       zoom: { enabled: true },
-//       toolbar: { show: false },
-//     },
-//     dataLabels: { enabled: false },
-//     stroke: { curve: "smooth" },
-//     xaxis: {
-//       categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-//     },
-//     tooltip: {
-//       shared: true,
-//       intersect: false,
-//     },
-//     colors: ["#008FFB", "#00E396", "#FEB019"],
-//     legend: {
-//       position: "top",
-//       horizontalAlign: "right",
-//     },
-//   };
+    plotOptions: {
+      bar: {
+        borderRadius: 4,
+        columnWidth: "20%",
+      },
+    },
+    dataLabels: { enabled: false },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ["transparent"],
+    },
+    xaxis: {
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    },
+    colors: ["#008FFB", "#00E396", "#FEB019"],
+    legend: {
+      position: "top",
+      horizontalAlign: "right",
+    },
+  };
   return (
     <div className="w-full bg-white p-4 rounded shadow ">
-         <div className="flex justify-center gap-5 mb-2">
-            <h5 className="bg-blue-600 py-2 p-3 text-white rounded-5">Total Recruiter:{totalRecruiters}</h5>
-            <h5 className="bg-green-600 py-2 p-3 text-white rounded-5">Total Users:{totalUsers}</h5>
-         </div>
+      <div className="flex justify-center gap-5 mb-2">
+        <h5 className="bg-blue-600 py-2 p-3 text-white rounded-5">
+          Total Recruiter:
+          {recuiter.length}
+        </h5>
+        <h5 className="bg-green-600 py-2 p-3 text-white rounded-5">
+          Total Users:{user.length}
+        </h5>
+      </div>
       <h6 className="text-center mb-3 font-bold">User Growth Overview</h6>
       <ReactApexChart
         options={options}
@@ -84,7 +93,7 @@ const options = {
         height={350}
       />
     </div>
-  )
+  );
 };
 
 export default AdminDashboard;

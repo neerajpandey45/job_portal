@@ -19,7 +19,9 @@ const RecruiterSidebar = () => {
             All posted jobs
           </li>
           <li>Total applicatons</li>
+          <Link href={`/recruiterHomepage/veiwApplications`}>
           <li>Veiw Appllications</li>
+          </Link>
           <div>
             <li className="flex gap-3" onClick={()=>setopen(!open)}>
               <i className="bi bi-gear"></i>

@@ -2,10 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import JobList from "./jobCard";
-// import JobDetails from "./jobDetails";
 const JobCard = () => {
   const [jobs, setJobs] = useState([]);
-  // const [selectedJob, setSelectedJob] = useState(null);
   useEffect(() => {
     const fetchAlljobs = async () => {
       try {
