@@ -1,6 +1,7 @@
 // server.js
 const express = require("express");
 const dotenv = require("dotenv");
+const path = require("path");
 const cors = require("cors");
 const { connectMongoDB } = require("./connection");
 const userRouter = require("./routes/users/user");
@@ -8,6 +9,10 @@ const recruiterRoute=require("./routes/recruiters/recruiter");
 const jobRoute=require("./routes/jobPost/jobPost");
 const allJobsRoutes=require("./routes/allJobs/allJob");
 const appliedJobRoutes=require("./routes/appliedJob/appliedJob");
+const allRecruiterApplications=require("./routes/recruiterARoutes/applicationRoutes");
+const allRecruiter=require("./routes/admin/adminRoutes");
+const allUsers=require("./routes/admin/adminRoutes");
+// const jobDeleteRoute=require("./routes/")
 const cookieParser=require("cookie-parser");
 dotenv.config();
 const app = express();
@@ -21,11 +26,19 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser()); 
 // Routes
-app.use("/api/users", userRouter);
-app.use("/api/recruiters",recruiterRoute);
-app.use("/api/jobs",jobRoute);
-app.use("/api/alljobs",allJobsRoutes);
-app.use("/api/applied-jobs",appliedJobRoutes);
+app.use("/api/users", userRouter);//for user 
+app.use("/api/recruiters",recruiterRoute);//for recruiter
+app.use("/api/jobs",jobRoute); // for jobs posting
+app.use("/api/alljobs",allJobsRoutes); // for see all posted job
+app.use("/api/applied-jobs",appliedJobRoutes); // for user can show their applied jobs
+app.use("/api/recruiters/applications",allRecruiterApplications); // recruiter see users application on their jobs
+app.use("/api/recruiter/delete",jobRoute);// for delete job
+app.use(
+  "/usersUploadedResume/resumes",
+  express.static(path.join(__dirname, "middlewares/usersUploadedResume/resumes"))
+);
+app.use("/api/admin",allRecruiter);
+app.use("/api/admin",allUsers);
 // Connect DB and Start Server
 connectMongoDB(process.env.MONGO_URI).then(() => {
   app.listen(PORT, () => {

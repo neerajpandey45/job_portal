@@ -10,9 +10,18 @@ const appliedJobs = new mongoose.Schema({
     ref: "Job",
     required: true,
   },
+  jobSnapshot: {
+    title: String,
+    companyName: String,
+    location: String,
+    experience: String,
+    jobType: String,
+    description: String,
+  },
    name: String,
   email: String,
   contactNumber: String,
+  resume:String,
   appliedAt: {
     type: Date,
     default: Date.now,
