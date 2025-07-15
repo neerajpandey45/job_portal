@@ -38,7 +38,6 @@ exports.createRecruiter = async (req, res) => {
     if (password !== confirmPassword) {
       return res.status(400).json({ error: "Passwords do not match." });
     }
-
     // ✅ Hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -81,18 +80,10 @@ exports.loginRecruiter = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
-
-    // ✅ Send token in httpOnly cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // true in production
-      sameSite: "strict",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-
     // ✅ Send basic recruiter data
     res.status(200).json({
       message: "Login successful",
+      token,//frontend will store this
       recruiter: {
         id: recruiter._id,
         firstName: recruiter.firstName,
@@ -104,10 +95,5 @@ exports.loginRecruiter = async (req, res) => {
   }
 };
 exports.logoutRecruiter = async (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    sameSite: "Lax",
-    secure: false, // set to true in production (https)
-  });
   res.status(200).json({ msg: "logout successfully" });
 };

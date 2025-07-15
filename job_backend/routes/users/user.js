@@ -5,9 +5,10 @@ const router = express.Router();
 const userController = require("../../controllers/users/userControllers");
 const authenticateToken = require("../../middlewares/authUsers");
 router.get("/check", authenticateToken, (req, res) => {
+   console.log("✅ Auth route success for userId:", req.userId);
   res.json({ authenticated: true, userId: req.user });
 });
-// GET /api/users
+// // GET /api/users
 router.get("/", userController.getAllUsers);
 // POST /api/users
 router.post("/register", userController.createUser);
@@ -18,7 +19,12 @@ router.get("/profile", authenticateToken, async (req, res) => {
   if (!userProfile) return res.status(400).json({ error: "user not found" });
   res.status(200).json(userProfile);
 });
-
+router.get("/fullDetails",authenticateToken,userController.UserFullDeatils);
+ router.post("/education",authenticateToken,userController.updateEducation); 
+ router.put("/education",authenticateToken,userController.updateEducation);
 router.post("/logout",userController.logoutUser);
+router.post("/add/summary",authenticateToken,userController.addSummary);
+router.put("/add/summary",authenticateToken ,userController.addSummary);
+router.post("/add/skills",authenticateToken,userController.addSkills);
 
 module.exports = router;

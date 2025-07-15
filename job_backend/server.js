@@ -17,11 +17,15 @@ const cookieParser=require("cookie-parser");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://192.168.121.43:3000", // ✅ your laptop's IP (accessed by mobile)
+];
 // Middlewares
 app.use(cors({
-  origin: "http://localhost:3000", // Your frontend domain
-  credentials: true, // 👈 allows cookies to be sent from frontend
+  origin: allowedOrigins, // Your frontend domain
+  // credentials: true, // 👈 allows cookies to be sent from frontend
+  allowedHeaders: ["Authorization", "Content-Type"],
 }));
 app.use(express.json());
 app.use(cookieParser()); 
@@ -40,8 +44,11 @@ app.use(
 app.use("/api/admin",allRecruiter);
 app.use("/api/admin",allUsers);
 // Connect DB and Start Server
+app.get("/api/ping", (req, res) => {
+  res.send("✅ Mobile can reach backend");
+});
 connectMongoDB(process.env.MONGO_URI).then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT,'0.0.0.0', () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
   });
 });

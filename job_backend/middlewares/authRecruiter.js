@@ -1,8 +1,13 @@
 const jwt = require("jsonwebtoken");
 const authRecruiter = (req, res, next) => {
-  const token = req.cookies.token;
+  const authHeader=req.headers["authorization"];
+  if(!authHeader || !authHeader.startsWith("Bearer")){
+    return res.status(401).json({msg:"aouthorization in not valid"})
+  }
+  const token = authHeader.split(" ")[1];
   if (!token) {
-    console.log("No token in cookies");
+    console.log("authorization",authHeader);
+    console.log("recruiter authentication token",token);
     return res.status(401).json({ error: "No token found" });
   }
   try {

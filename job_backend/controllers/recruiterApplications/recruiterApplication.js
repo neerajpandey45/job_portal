@@ -16,9 +16,7 @@ console.log("req.recruiterId from token:", recruiterId);
     if (!job.recruiterId || job.recruiterId.toString() !== recruiterId) {
       return res.status(403).json({ error: "No applications for this job" });
     }
-
     const applications = await AppliedJob.find({ jobId: jobId }).select("name email contactNumber resume");
-
     res.status(200).json({
       totalApplications: applications.length,
       applicants: applications,

@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  lastName:{
-    type:String,
+  lastName: {
+    type: String,
   },
   email: {
     type: String,
@@ -16,6 +16,42 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  phone: {
+    type: String,
+  },
+  summary:{
+    type:String,
+  },
+  skills: [String],
+  education: [
+    {
+      degree: String,
+      institution: String,
+      startYear: Number,
+      endYear: Number,
+    },
+  ],
+  experience: [
+    {
+      company: String,
+      designation: String,
+      startDate: Date,
+      endDate: Date,
+      description: String,
+    },
+  ],
+  projects: [
+    {
+      title: String,
+      description: String,
+      techStack: [String],
+      link: String,
+    },
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 // Hash password before saving
