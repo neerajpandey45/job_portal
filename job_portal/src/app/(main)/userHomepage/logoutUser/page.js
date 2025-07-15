@@ -1,27 +1,20 @@
 "use client";
+import axiosInstance from "@/services/axiosInstance";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 const logoutUser = () => {
   const router = useRouter();
   useEffect(() => {
-    const logout = async () => {
+    const handleLogout = () => {
       try {
-        await axios.post(
-          "http://localhost:5000/api/users/logout",
-          {},
-          {
-            withCredentials: true,
-          }
-        );
-        toast.success("logout succesfully");
-        router.push("/login/users");
-      } catch (err) {
-        console.log("error", err);
-      }
+        localStorage.removeItem("token");
+        toast.success("logout successfully");
+        router.push("/login/users"); // or home page
+      } catch (err) {}
     };
-    logout();
+    handleLogout();
   }, [router]);
   return null;
 };

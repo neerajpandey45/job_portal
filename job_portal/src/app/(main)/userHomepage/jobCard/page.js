@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import JobList from "./jobCard";
+import axiosInstance from "@/services/axiosInstance";
 const JobCard = () => {
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
     const fetchAlljobs = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/alljobs/jobs");
+        const res = await axiosInstance.get("/alljobs/jobs");
         setJobs(res.data);
       } catch (err) {
         console.error("Error fetching jobs:", err);
@@ -25,7 +26,7 @@ const JobCard = () => {
       <div className="container">
         <div className="row flex justify-center py-2">
           {jobs.map((job)=>(
-            <div key={job._id} className="col-7 mb-4">
+            <div key={job._id} className="col-12 col-md-7 mb-4">
               <JobList job={job}/>
             </div>
           ))}

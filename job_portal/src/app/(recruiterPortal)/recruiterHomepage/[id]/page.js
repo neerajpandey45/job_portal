@@ -1,5 +1,6 @@
 "use client";
-import axios from "axios";
+import axiosInstance from "@/services/axiosInstance";
+// import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 const AllApplications = () => {
@@ -9,11 +10,11 @@ const AllApplications = () => {
   useEffect(() => {
     const fetchApplication = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/recruiters/applications/${id}`,
-          {
-            withCredentials: true,
-          }
+        const res = await axiosInstance.get(
+          `/recruiters/applications/${id}`,
+          // {
+          //   withCredentials: true,
+          // }
         );
         setApplication(res.data.applicants);
       } catch (err) {

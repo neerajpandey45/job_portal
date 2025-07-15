@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import axiosInstance from "@/services/axiosInstance";
 const RecruiterProfile = () => {
   const [recruiter, setRecruiter] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/recruiters/profile", {
-          withCredentials: true, // 🔐 send cookie
+        const res = await axiosInstance.get("/recruiters/profile", {
         });
         setRecruiter(res.data);
       } catch (err) {
@@ -25,7 +25,6 @@ const RecruiterProfile = () => {
   if (!recruiter) return <p className="text-center text-danger">Not authorized or error loading profile.</p>;
   return (
     <div className="p-4">
-      {/* <h2 className="text-xl font-semibold mb-4">Recruiter Profile</h2> */}
       <p><strong></strong> {recruiter.firstName} {recruiter.lastName}</p>
       <p><strong></strong> {recruiter.email}</p>
     </div>

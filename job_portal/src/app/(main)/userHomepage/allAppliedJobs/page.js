@@ -1,23 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import JobList from "../jobCard/jobCard";
+import axiosInstance from "@/services/axiosInstance";
 const UserAppliedJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
-
-   useEffect(() => {
-     const fetchAppliedJobs = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:5000/api/applied-jobs/appliedAlljobs",
-        { withCredentials: true }
-      );
-      console.log("Fetched Applied Jobs:", res.data); // Add this
-      setAppliedJobs(res.data);
-    } catch (err) {
-      console.error("Failed to fetch applied jobs", err);
-    } 
-  };
+  useEffect(() => {
+    const fetchAppliedJobs = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const res = await axiosInstance.get("/applied-jobs/appliedAlljobs", {});
+        console.log("Fetched Applied Jobs:", res.data); // Add this
+        setAppliedJobs(res.data);
+      } catch (err) {
+        console.error("Failed to fetch applied jobs", err);
+      }
+    };
     fetchAppliedJobs();
   }, []);
 
@@ -25,13 +22,18 @@ const UserAppliedJobs = () => {
     return (
       <p className="text-center mt-4">You haven't applied to any jobs yet.</p>
     );
-return (
+  return (
     <div className="container mt-4">
-      <h4 className="mb-3">Your Applied Jobs</h4>
+      <ul className="flex md:hidden gap-2 w-full overflow-x-auto whitespace-nowrap list-unstyled" style={{scrollbarWidth:"none"}}>
+        <li className="border p-1 rounded-3 bg-amber-200">applied job</li>
+        <li className="border p-1 rounded-3 bg-blue-400">Reccommended job</li>
+        <li className="border p-1 rounded-3 bg-blue-400">Profile Job</li>
+      </ul>
+      <h4 className="mb-3">Your Applied Jobs:{appliedJobs.length}</h4>
       <div className="row flex justify-center">
         {appliedJobs.map((application) => (
-          <div key={application._id} className="col-7 mb-4">
-               <JobList job={application.jobId || application.jobSnapshot} />
+          <div key={application._id} className="col-11 col-md-7 mb-4">
+            <JobList job={application.jobId || application.jobSnapshot} />
           </div>
         ))}
       </div>

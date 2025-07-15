@@ -1,7 +1,8 @@
 "use client";
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-toastify";
 import React, { useState } from "react";
+import axiosInstance from "@/services/axiosInstance";
 const Jobform = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -20,8 +21,8 @@ const Jobform = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/jobs/jobpost", formData, {
-        withCredentials: true,
+      await axiosInstance.post("/jobs/jobpost", formData, {
+        // withCredentials: true,
       });
       toast.success("successfully posted");
     } catch (err) {

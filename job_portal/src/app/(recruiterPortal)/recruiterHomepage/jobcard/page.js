@@ -1,18 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import axiosInstance from "@/services/axiosInstance";
 const JobCard = () => {
   const router=useRouter();
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:5000/api/jobs/recruiterjobs",
+        const res = await axiosInstance.get(
+          "/jobs/recruiterjobs",
           {
-            withCredentials: true,
+            // withCredentials: true,
           }
         );
         setJobs(res.data.jobs);
@@ -25,9 +26,9 @@ const JobCard = () => {
  // ✅ Delete handler
   const handleDelete = async (jobId) => {
     try {
-      const res = await axios.delete(
-        `http://localhost:5000/api/recruiter/delete/${jobId}`,
-        { withCredentials: true }
+      const res = await axiosInstance.delete(
+        `/recruiter/delete/${jobId}`,
+        // { withCredentials: true }
       );
       setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
       toast.success("Deleted successfully");

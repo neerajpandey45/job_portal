@@ -1,4 +1,5 @@
 "use client";
+import axiosInstance from "@/services/axiosInstance";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -8,13 +9,10 @@ const LogoutRecuiter = () => {
   useEffect(() => {
     const logout = async () => {
       try {
-        await axios.post(
-          "http://localhost:5000/api/recruiters/logout",
-          {},
-          {
-            withCredentials: true,
-          }
+        await axiosInstance.post(
+          "/recruiters/logout",
         );
+        localStorage.removeItem("items");
         toast.success("logout successfully");
         router.push("/");
       } catch (err) {

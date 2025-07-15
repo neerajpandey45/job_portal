@@ -29,10 +29,15 @@ const Sidebar = ({ setOpenSide }) => {
                 Search jobs
               </Link>
             </li>
-            <li className="flex gap-3">
-              <i className="bi bi-briefcase"></i>
-              Recommmended jobs
-            </li>
+            <Link
+              href="/userHomepage/jobCard"
+              className="flex gap-3 text-decoration-none text-reset"
+            >
+              {/* <li> */}
+                <i className="bi bi-briefcase"></i>
+                Recommmended jobs
+              {/* </li> */}
+            </Link>
             <li>
               <Link
                 href=""

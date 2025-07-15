@@ -32,7 +32,7 @@ const Navabar = ({onToggleSidebar}) => {
         <i className="bi bi-list md:hidden" onClick={onToggleSidebar}></i>
         <h4 className="hidden md:block">Home</h4>
       </div>
-      <div className="hidden sm:flex gap-5 items-center" ref={ref}>
+      <div className="hidden lg:flex gap-5 items-center" ref={ref}>
         <Jobs
           isOpen={openMenu === "jobs"}
           onToggle={() => setOpenMenu(openMenu === "jobs" ? "" : "jobs")}

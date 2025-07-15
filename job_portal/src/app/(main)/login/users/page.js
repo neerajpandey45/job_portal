@@ -2,7 +2,8 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "@/services/axiosInstance";
 const UsersLogin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -12,13 +13,12 @@ const UsersLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", {
+      const res = await axiosInstance.post("/users/login", {
         email,
         password,
-      },{
-  withCredentials: true,
-}
+      },
     );
+    localStorage.setItem("token", res.data.token);
       toast.success("Login successful!");
       router.push("/userHomepage");
     } catch (err) {

@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/services/axiosInstance";
 const UserRegistration = () => {
-  const router=useRouter(); 
-  const [showPass,setShowPass]=useState(false);
+  const router = useRouter();
+  const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,20 +22,19 @@ const UserRegistration = () => {
     e.preventDefault();
     setError("");
     setSuccess("");
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     if (!emailRegex.test(formData.username)) {
       setError("Please enter a valid email address.");
       return;
     }
     try {
-      const res = await axios.post("http://localhost:5000/api/users/register", {
-      firstName: formData.firstName,
-  lastName: formData.lastName,
-  email: formData.username,
-  password: formData.password,
+      const res = await axiosInstance.post("/users/register", {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.username,
+        password: formData.password,
       });
-      
+
       setSuccess("User registered successfully!");
       setFormData({
         firstName: "",
@@ -43,7 +42,7 @@ const UserRegistration = () => {
         username: "",
         password: "",
       });
-         setTimeout(() => {
+      setTimeout(() => {
         router.push("/login/users"); // ✅ Navigate to login
       }, 1000);
     } catch (err) {
@@ -105,7 +104,7 @@ const UserRegistration = () => {
           <div className="w-full relative">
             <label>Password</label>
             <input
-              type={`${showPass ? "text":"password"}`}
+              type={`${showPass ? "text" : "password"}`}
               name="password"
               value={formData.password}
               onChange={handleChange}
@@ -113,7 +112,12 @@ const UserRegistration = () => {
               className="w-full px-3 border border-black h-[30px] rounded-md"
               required
             />
-            <i className={`bi ${showPass?"bi-eye-slash":"bi-eye"} absolute right-5 top-50`} onClick={()=>setShowPass(!showPass)}></i>
+            <i
+              className={`bi ${
+                showPass ? "bi-eye-slash" : "bi-eye"
+              } absolute right-5 top-50`}
+              onClick={() => setShowPass(!showPass)}
+            ></i>
           </div>
 
           {error && <p className="text-red-500">{error}</p>}

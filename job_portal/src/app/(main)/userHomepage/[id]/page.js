@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useParams } from "next/navigation";
 import { getRelativeTime } from "@/utils/jobdateFormat";
 import AppliedJob from "../appliedjob/page";
+import axiosInstance from "@/services/axiosInstance";
 const JobDetailsPage = () => {
   const { id } = useParams(); // dynamic ID from URL
   const [job, setJob] = useState(null);
@@ -11,7 +12,7 @@ const JobDetailsPage = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/alljobs/${id}`);
+        const res = await axiosInstance.get(`/alljobs/${id}`);
         setJob(res.data);
       } catch (err) {
         console.error("Error fetching job:", err);

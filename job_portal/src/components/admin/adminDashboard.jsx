@@ -1,7 +1,7 @@
 "use client";
-import axios from "axios";
 import React, { useState,useEffect } from "react";
 import dynamic from "next/dynamic"; // Import dynamic from Next.js
+import axiosInstance from "@/services/axiosInstance";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const AdminDashboard = () => {
@@ -10,7 +10,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchRecruiter = async () => {
       try {
-        const res=await axios.get("http://localhost:5000/api/admin/allRecruiters");
+        const res=await axiosInstance.get("/admin/allRecruiters");
           setRecruiter(res.data);
       } catch (err) {
         console.log("err", err);
@@ -21,7 +21,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res=await axios.get("http://localhost:5000/api/admin/allUsers");
+        const res=await axiosInstance.get("/admin/allUsers");
           setUser(res.data);
       } catch (err) {
         console.log("err", err);

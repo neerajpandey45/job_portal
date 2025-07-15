@@ -1,7 +1,8 @@
 "use client";
+import axiosInstance from "@/services/axiosInstance";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-toastify";
 export default function Recruiter() {
   const router = useRouter();
@@ -11,11 +12,12 @@ export default function Recruiter() {
   const handle = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post(
-      "http://localhost:5000/api/recruiters/login",
+    const res = await axiosInstance.post(
+      "/recruiters/login",
       { email, password }, // ✅ request body
-      { withCredentials: true } // ✅ request config (separate)
+      // { withCredentials: true } // ✅ request config (separate)
     );
+      localStorage.setItem("token", res.data.token);
     toast.success("Login successfully");
     router.push("/recruiterHomepage");
   } catch (err) {

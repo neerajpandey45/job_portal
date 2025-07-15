@@ -1,4 +1,5 @@
 "use client";
+import axiosInstance from "@/services/axiosInstance";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 const UserProfile = ({ isOpen, toggleProfile }) => {
@@ -6,9 +7,9 @@ const UserProfile = ({ isOpen, toggleProfile }) => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
-          withCredentials: true,
+        const res = await axiosInstance.get("/users/profile", {
         });
+      
         setUser(res.data);
       } catch (err) {
         console.log("user not found", err);

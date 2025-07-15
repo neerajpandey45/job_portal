@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import axiosInstance from "@/services/axiosInstance";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 const VeiwApplications = () => {
@@ -8,11 +8,8 @@ const VeiwApplications = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:5000/api/jobs/recruiterjobs",
-          {
-            withCredentials: true,
-          }
+        const res = await axiosInstance.get(
+          "/jobs/recruiterjobs",
         );
         setJobs(res.data.jobs);
       } catch (err) {
