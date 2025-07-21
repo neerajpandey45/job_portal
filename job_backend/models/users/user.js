@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+   profileImage: {
+    type: String,
+    default: "", // Optional: default empty path
+  },
   password: {
     type: String,
     required: true,
@@ -20,10 +24,16 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
-  summary:{
-    type:String,
+  summary: {
+    type: String,
   },
   skills: [String],
+  otp: String,
+  otpExpiry: Date,
+  isOtpVerified: {
+  type: Boolean,
+  default: false,
+},
   education: [
     {
       degree: String,

@@ -20,11 +20,10 @@ router.get("/profile", authenticateToken, async (req, res) => {
   res.status(200).json(userProfile);
 });
 router.get("/fullDetails",authenticateToken,userController.UserFullDeatils);
- router.post("/education",authenticateToken,userController.updateEducation); 
- router.put("/education",authenticateToken,userController.updateEducation);
+//  router.post("/education",authenticateToken,userController.updateEducation); 
+ router.put("/add/education",authenticateToken,userController.updateEducation);
 router.post("/logout",userController.logoutUser);
-router.post("/add/summary",authenticateToken,userController.addSummary);
 router.put("/add/summary",authenticateToken ,userController.addSummary);
-router.post("/add/skills",authenticateToken,userController.addSkills);
+router.put("/add/skills",authenticateToken,userController.addSkills);
 
 module.exports = router;

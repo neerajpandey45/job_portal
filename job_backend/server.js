@@ -12,6 +12,9 @@ const appliedJobRoutes=require("./routes/appliedJob/appliedJob");
 const allRecruiterApplications=require("./routes/recruiterARoutes/applicationRoutes");
 const allRecruiter=require("./routes/admin/adminRoutes");
 const allUsers=require("./routes/admin/adminRoutes");
+const forgotPassword=require("./routes/userPassword/forgotPassword");
+const resumeRoutes=require("./routes/resume/resume");
+const imageRoutes=require("./routes/profileImages/profileImageRoutes");
 // const jobDeleteRoute=require("./routes/")
 const cookieParser=require("cookie-parser");
 dotenv.config();
@@ -19,7 +22,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:3000",
-  "http://192.168.121.43:3000", // ✅ your laptop's IP (accessed by mobile)
+  "http://192.168.47.43:3000", // ✅ your laptop's IP (accessed by mobile)
 ];
 // Middlewares
 app.use(cors({
@@ -38,11 +41,15 @@ app.use("/api/applied-jobs",appliedJobRoutes); // for user can show their applie
 app.use("/api/recruiters/applications",allRecruiterApplications); // recruiter see users application on their jobs
 app.use("/api/recruiter/delete",jobRoute);// for delete job
 app.use(
-  "/usersUploadedResume/resumes",
-  express.static(path.join(__dirname, "middlewares/usersUploadedResume/resumes"))
+  "/uploads/resumes",
+  express.static(path.join(__dirname, "middlewares/uploads/resumes"))
 );
+app.use( "/middlewares/uploads/profileImages", express.static(path.join(__dirname, "middlewares/uploads/profileImages")));
 app.use("/api/admin",allRecruiter);
 app.use("/api/admin",allUsers);
+app.use("/api/users",forgotPassword);
+app.use("/api/resume",resumeRoutes);
+app.use("/api/uploads",imageRoutes);
 // Connect DB and Start Server
 app.get("/api/ping", (req, res) => {
   res.send("✅ Mobile can reach backend");

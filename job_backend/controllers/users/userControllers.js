@@ -20,7 +20,6 @@ exports.createUser = async (req, res) => {
         .status(400)
         .json({ error: "firstname ,email and password is require" });
     }
-   
     const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ erro: "Invalid email format" });
@@ -71,7 +70,7 @@ exports.logoutUser = (req, res) => {
   res.status(200).json({ msg: "logout" });
 };
 // education section
-exports.updateEducation = async (req, res) => {
+exports.updateEducation = async(req, res)=>{
   const { education } = req.body;
   try {
     const user = await User.findById(req.userId);
@@ -115,7 +114,7 @@ exports.addSkills = async (req, res) => {
 // //user full profile details
 exports.UserFullDeatils = async (req, res) => {
   const userProfile = await User.findById(req.userId).select(
-    "firstName lastName email education summary skills"
+    "firstName lastName email education summary skills profileImage"
   );
   if (!userProfile) return res.status(400).json({ error: "user not found" });
   res.status(200).json(userProfile);

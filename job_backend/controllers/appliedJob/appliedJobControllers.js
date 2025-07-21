@@ -1,5 +1,5 @@
 const AppliedJob = require("../../models/appliedJobs/userAppliedJobs");
-const upload=require("../../middlewares/usersUploadedResume/uploadedResume")
+const upload=require("../../middlewares/uploads/uploadedResume")
 const job=require("../../models/jobs/jobs")
 exports.applyJob = [
   upload.single("resume"),
@@ -23,7 +23,7 @@ exports.applyJob = [
       name,
       email,
       contactNumber,
-        resume: `/usersUploadedResume/resumes/${req.file.filename}`,
+        resume: `/uploads/resumes/${req.file.filename}`,
        jobSnapshot: {
         title: jobData.title,
         companyName: jobData.companyName,

@@ -7,8 +7,7 @@ exports.getJobApplications = async (req, res) => {
     const jobId = req.params.jobId;
     const job = await Job.findById(jobId);
     console.log("job.recruiterId:", job.recruiterId);
-console.log("req.recruiterId from token:", recruiterId);
-
+    console.log("req.recruiterId from token:", recruiterId);
     if (!job) {
       return res.status(404).json({ error: "Job not found" });
     }
