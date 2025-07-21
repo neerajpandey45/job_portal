@@ -13,7 +13,7 @@ const Footer = () => {
         </Link>
         <li>Invites</li>
         <Link
-          href="/userHomepage/userFullProfile"
+          href="/userHomepage/newModal"
           className=" text-decoration-none text-reset"
         >
           <li>Profile</li>

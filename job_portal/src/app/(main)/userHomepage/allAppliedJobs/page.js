@@ -4,6 +4,8 @@ import JobList from "../jobCard/jobCard";
 import axiosInstance from "@/services/axiosInstance";
 const UserAppliedJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const items = ["Applied Job", "Recommended Job", "Profile Job"];
   useEffect(() => {
     const fetchAppliedJobs = async () => {
       const token = localStorage.getItem("token");
@@ -24,10 +26,21 @@ const UserAppliedJobs = () => {
     );
   return (
     <div className="container mt-4">
-      <ul className="flex md:hidden gap-2 w-full overflow-x-auto whitespace-nowrap list-unstyled" style={{scrollbarWidth:"none"}}>
-        <li className="border p-1 rounded-3 bg-amber-200">applied job</li>
-        <li className="border p-1 rounded-3 bg-blue-400">Reccommended job</li>
-        <li className="border p-1 rounded-3 bg-blue-400">Profile Job</li>
+      <ul
+        className="flex md:hidden gap-2 w-full overflow-x-auto whitespace-nowrap list-unstyled"
+        style={{ scrollbarWidth: "none" }}
+      >
+        {items.map((item, index) => (
+          <li
+            key={index}
+            onClick={() => setActiveIndex(index)}
+            className={`border p-1 px-1 rounded-3 cursor-pointer transition-colors duration-300 ${
+              activeIndex === index ? "bg-amber-400" : "bg-blue-300"
+            }`}
+          >
+            {item}
+          </li>
+        ))}
       </ul>
       <h4 className="mb-3">Your Applied Jobs:{appliedJobs.length}</h4>
       <div className="row flex justify-center">

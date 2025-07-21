@@ -24,19 +24,22 @@ const RecruiterSidebar = ({setOpenSide}) => {
           <li onClick={() => router.push("/recruiterHomepage/jobcard")}>
             All posted jobs
           </li>
-          <li>Total applicatons</li>
-          <Link href={`/recruiterHomepage/veiwApplications`}>
+          {/* <li>Total applicatons</li> */}
+          <Link href={`/recruiterHomepage/veiwApplications`} 
+          className="text-decoration-none text-reset">
             <li>Veiw Appllications</li>
           </Link>
-          <div>
+          <div className="py-3">
             <li className="flex gap-3" onClick={() => setopen(!open)}>
               <i className="bi bi-gear"></i>
               Setting
             </li>
             {open && (
               <ul className="space-y-2 mt-2">
-                <Link href="/recruiterHomepage/logoutRecruiter">
-                  <li>logout</li>
+                <Link href="/recruiterHomepage/logoutRecruiter"
+                className="flex text-decoration-none text-reset"
+                >
+                <li>logout</li>
                 </Link>
                 <li>Deactivate</li>
               </ul>

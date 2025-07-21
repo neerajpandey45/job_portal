@@ -1,6 +1,9 @@
 "use client";
+import VeiwApplications from "./veiwApplications/page";
 export default function Profile(){
     return (
-        <div></div>
+        <div>
+         <VeiwApplications/>
+        </div>
     );
 }

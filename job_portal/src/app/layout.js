@@ -11,6 +11,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="w-full h-screen overflow-x-auto">
+        <div id="backdrop"></div>
+        <div id="overlay"></div>
         <div>
           {children}
           <ToastContainer position="top-center" autoClose={2000} />

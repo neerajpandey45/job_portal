@@ -34,8 +34,8 @@ const Sidebar = ({ setOpenSide }) => {
               className="flex gap-3 text-decoration-none text-reset"
             >
               {/* <li> */}
-                <i className="bi bi-briefcase"></i>
-                Recommmended jobs
+              <i className="bi bi-briefcase"></i>
+              Recommmended jobs
               {/* </li> */}
             </Link>
             <li>
@@ -55,9 +55,12 @@ const Sidebar = ({ setOpenSide }) => {
             <li className="flex gap-3">
               <i className="bi bi-duffle"></i>Jobseeker services
             </li>
-            <li className="flex gap-3">
+            <Link href="/userHomepage/photo" className="flex gap-3">
               <i className="bi bi-list-ul"></i>Naukri blog
-            </li>
+            </Link>
+            {/* <li className="flex gap-3">
+              <i className="bi bi-list-ul"></i>Naukri blog
+            </li> */}
             <li className="flex gap-3">
               <i className="bi bi-question-circle"></i>How jobportal works
             </li>

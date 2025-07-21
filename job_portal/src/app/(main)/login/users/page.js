@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-// import axios from "axios";
 import axiosInstance from "@/services/axiosInstance";
 const UsersLogin = () => {
   const router = useRouter();
@@ -78,7 +77,7 @@ const UsersLogin = () => {
             <button type="submit" className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
               Submit
             </button>
-            <p className="text-blue-600 hover:underline cursor-pointer">
+            <p className="text-blue-600 hover:underline cursor-pointer" onClick={()=>router.push("/resetPassword")}>
               Forgot password?
             </p>
           </div>

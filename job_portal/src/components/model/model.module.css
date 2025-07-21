@@ -1,0 +1,60 @@
+.wrapper{
+    padding: 20px;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+}
+.model{
+    position: fixed;
+    right: 0%;
+    width: 40vw;
+    height: 100vh;
+    overflow: hidden;
+    top: 0%;
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    transition: all 0.3 ease;
+    background-color: white;
+    padding: 2rem 15px;
+    box-shadow: 0 0 3px 0 lightgray;
+    border-radius: 5px;
+    animation-name: anime;
+    animation-duration: 0.7s;
+    animation-timing-function: ease;
+    animation-delay: 0ms;
+    overflow-y: auto;
+}
+.model h6{
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}
+.model button{
+    border: none;
+    padding: 3px 1.2rem;
+    background-color: rgb(251,195,27);
+    font-size: 14px;
+    border-radius: 5px;
+}
+.model button:nth-child(1){
+    background-color: lightgreen;
+}
+@keyframes anime {
+    from{
+        right: -40%;
+    }
+    to{
+        right:0;
+    }
+}
+.buttonQuest{
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    border:1px solid lightgray;
+    width: 100%;
+    color: black;
+}

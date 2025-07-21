@@ -1,6 +1,5 @@
 "use client";
 import axiosInstance from "@/services/axiosInstance";
-// import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 const AllApplications = () => {
@@ -10,12 +9,7 @@ const AllApplications = () => {
   useEffect(() => {
     const fetchApplication = async () => {
       try {
-        const res = await axiosInstance.get(
-          `/recruiters/applications/${id}`,
-          // {
-          //   withCredentials: true,
-          // }
-        );
+        const res = await axiosInstance.get(`/recruiters/applications/${id}`);
         setApplication(res.data.applicants);
       } catch (err) {
         console.log("error", err);
@@ -30,11 +24,9 @@ const AllApplications = () => {
       alert("Resume not uploaded");
       return;
     }
-
-    const fullURL = `http://localhost:5000${resumePath}`;
+    const fullURL = `http://192.168.121.43:5000${resumePath}`;
     window.open(fullURL, "_blank", "noopener,noreferrer");
   };
-
   return (
     <div className="p-4">
       <h2>Total Applications: {application.length}</h2>
@@ -60,13 +52,12 @@ const AllApplications = () => {
               View Resume
             </button>
             <a
-  href={`http://localhost:5000${applicant.resume}`}
-  download // ✅ triggers direct download
-  className="btn btn-sm btn-primary"
->
-  Download Resume
-</a>
-
+              href={`http://192.168.121.43:5000/api/resume/download?path=${applicant.resume}`}
+              download
+              className="btn btn-primary"
+            >
+              Download Resume
+            </a>
           </div>
         </div>
       ))}
