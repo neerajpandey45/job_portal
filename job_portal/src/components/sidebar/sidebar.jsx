@@ -55,7 +55,7 @@ const Sidebar = ({ setOpenSide }) => {
             <li className="flex gap-3">
               <i className="bi bi-bar-chart-line"></i>Profile performance
             </li>
-            <li className="flex gap-3" onClick={toggleTheme}>
+            <li className="flex md:hidden gap-3" onClick={toggleTheme}>
               <i className="bi bi-eye" >
             </i>
             switch to {`${isDark?"light":"dark"}`}
