@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-// import { useTheme } from "@/utils/screenTheme/themeContext";
+import { useTheme } from "@/utils/screenTheme/themeContext";
 const Sidebar = ({ setOpenSide }) => {
-  // const {isDark,toggleTheme}=useTheme();
+  const {isDark,toggleTheme}=useTheme(false);
   const [openMenu, setOpenMenu] = useState(false);
+  console.log(isDark);
   return (
     <div className="w-full flex flex-wrap ">
       <div className="w-full md:w-[20vw] min-h-[100vh] shadow p-3 cursor-pointer ">
@@ -54,8 +55,10 @@ const Sidebar = ({ setOpenSide }) => {
             <li className="flex gap-3">
               <i className="bi bi-bar-chart-line"></i>Profile performance
             </li>
-            <li className="flex gap-3">
-              <i className="bi bi-eye"></i>Display prefrences
+            <li className="flex gap-3" onClick={toggleTheme}>
+              <i className="bi bi-eye" >
+            </i>
+            switch to {`${isDark?"light":"dark"}`}
             </li>
             <li className="flex gap-3">
               <i className="bi bi-duffle"></i>Jobseeker services

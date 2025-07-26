@@ -7,7 +7,7 @@ export const ThemeProvider = ({children}) => {
   return (
     <div>
       <themeContext.Provider value={{ isDark, toggleTheme }}>
-        <div className={`${isDark?"bg-gray-800 text-white":"bg-white"}`}>{children}</div>
+        <div className={`${isDark?"bg-gray-900 text-white":"bg-white text-black"}`}>{children}</div>
       </themeContext.Provider>
     </div>
   );

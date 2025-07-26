@@ -5,10 +5,12 @@ import Sidebar from "@/components/sidebar/sidebar";
 import Navabar from "@/components/navbar/navbar";
 import Footer from "@/module/footer/footer";
 import axiosInstance from "@/services/axiosInstance"; // use interceptor setup
+import { useTheme } from "@/utils/screenTheme/themeContext";
 const UserLayout = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isOpenSide, setIsOpenSide] = useState(false);
+  const {isDark}=useTheme(false);
   const router = useRouter();
   const pathname = usePathname();
   const toggleSidebar = () => {
@@ -61,12 +63,11 @@ const UserLayout = ({ children }) => {
         <div className="hidden md:block">
           <Sidebar />
         </div>
-        {isOpenSide && (
-          <div className="fixed top-0 left-0 h-screen w-[70%] bg-white z-40 shadow-md md:hidden">
+         {isOpenSide && (
+          <div className={`fixed top-0 left-0 h-screen w-[70%] shadow z-40 md:hidden ${isDark?"bg-gray-900 text-white":"bg-white text-black"}`}>
             <Sidebar setOpenSide={setIsOpenSide} />
           </div>
         )}
-
         <main
           className="w-full overflow-y-scroll"
           style={{ scrollbarWidth: "none" }}
@@ -74,6 +75,7 @@ const UserLayout = ({ children }) => {
           {children}
         </main>
       </div>
+     
       {pathname === "/userHomepage" && (
         <div className="md:hidden">
           <Footer />
