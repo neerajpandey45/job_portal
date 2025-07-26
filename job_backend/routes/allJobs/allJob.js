@@ -2,7 +2,10 @@
 const express = require("express");
 const router = express.Router();
 const Job = require("../../models/jobs/jobs");
+const filterJob=require("../../controllers/jobs/jobControllers")
 // GET all jobs
+router.get("/job",filterJob.getFilterJob);// for filter jobs
+
 router.get("/jobs", async (req, res) => {
   try {
     const jobs = await Job.find().populate("recruiterId", "name email"); // Optional: populate recruiter info
@@ -20,4 +23,5 @@ router.get("/:id",async (req,res)=>{
     res.status(500).json({ error: "Server error" });
   }
 });
+
 module.exports = router;

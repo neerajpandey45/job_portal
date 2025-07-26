@@ -1,4 +1,3 @@
-
 const Jobs = require("../../models/jobs/jobs");
 exports.jobpost = async (req, res) => {
   try {
@@ -59,7 +58,9 @@ exports.jobpost = async (req, res) => {
 exports.getRecruiterJobs = async (req, res) => {
   try {
     const recruiterId = req.recruiterId;
+    console.log("Recruiter ID from token:", recruiterId);
     const jobs = await Jobs.find({ recruiterId });
+    console.log(jobs);
     res.status(200).json({
       total: jobs.length,
       jobs,
@@ -73,7 +74,7 @@ exports.deleteJobs=async(req,res)=>{
   try{
     const recruiterId=req.recruiterId;
     const jobId=req.params.jobId;
-    const job=await Jobs.findByIdAndDelete({_id:jobId,recruiterId:recruiterId});
+    const job=await Jobs.findByIdAndDelete({_id:jobId.trim(),recruiterId:recruiterId});
 
     if(!job) {
       return res.status(404).json({msg:"not find any job or unauthrized"}) ;
@@ -85,3 +86,31 @@ exports.deleteJobs=async(req,res)=>{
     res.status(500).json({ error: "Server error" });
   }
 }
+exports.getFilterJob = async (req, res) => {
+  try {
+    const title = req.query.title?.trim();
+    const location = req.query.location?.trim();
+    const filter = {};
+    console.log("Query received:", { title, location });
+    if (title && location) {
+      filter.$and = [
+        { title: { $regex: title, $options: "i" } },
+        { location: { $regex: location, $options: "i" } }
+      ];
+    } else if (title) {
+      filter.title = { $regex: title, $options: "i" };
+    } else if (location) {
+      filter.location = { $regex: location, $options: "i" };
+    }
+
+    // console.log("MongoDB filter:", filter);
+
+    const job = await Jobs.find(filter);
+    console.log("Filtered result:", job);
+
+    res.status(200).json(job);
+  } catch (err) {
+    console.error("Error fetching jobs:", err);
+    res.status(500).json({ msg: "error in fetching" });
+  }
+};

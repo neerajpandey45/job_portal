@@ -50,6 +50,7 @@ exports.createRecruiter = async (req, res) => {
       state,
       email,
       password: hashedPassword, // ✅ hashed
+      confirmPassword
     });
 
     await newRecruiter.save();

@@ -119,3 +119,4 @@ exports.UserFullDeatils = async (req, res) => {
   if (!userProfile) return res.status(400).json({ error: "user not found" });
   res.status(200).json(userProfile);
 };
+
