@@ -50,7 +50,6 @@ const AppliedJob = ({ onClose }) => {
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         required
       />
-
       <input
         type="email"
         placeholder="Your Email"
@@ -59,7 +58,6 @@ const AppliedJob = ({ onClose }) => {
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         required
       />
-
       <input
         type="text"
         placeholder="Contact Number"
@@ -88,5 +86,4 @@ const AppliedJob = ({ onClose }) => {
     </form>
   );
 };
-
 export default AppliedJob;

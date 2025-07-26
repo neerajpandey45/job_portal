@@ -4,6 +4,8 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 const AllApplications = () => {
   const { id } = useParams();
+//   const params = useParams();
+// console.log("useParams value:", params);
   const [application, setApplication] = useState([]);
   console.log("URL id param:", id);
   useEffect(() => {
@@ -24,9 +26,10 @@ const AllApplications = () => {
       alert("Resume not uploaded");
       return;
     }
-    const fullURL = `http://192.168.121.43:5000${resumePath}`;
+    const fullURL = `http://192.168.117.43:5000${resumePath}`;
     window.open(fullURL, "_blank", "noopener,noreferrer");
   };
+  console.log(application)
   return (
     <div className="p-4">
       <h2>Total Applications: {application.length}</h2>
@@ -52,7 +55,7 @@ const AllApplications = () => {
               View Resume
             </button>
             <a
-              href={`http://192.168.121.43:5000/api/resume/download?path=${applicant.resume}`}
+              href={`http://192.168.117.43:5000/api/resume/download?path=${applicant.resume}`}
               download
               className="btn btn-primary"
             >

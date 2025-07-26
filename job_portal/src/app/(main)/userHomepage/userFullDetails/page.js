@@ -8,10 +8,11 @@ const ModalPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const action = searchParams.get("action");
+
   const closeModal = () => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.delete("action");
-    router.replace(`/userHomepage/newModal${current.toString()}`),
+    router.replace(`/userHomepage/userFullDetails${current.toString()}`),
       { scroll: false };
   };
   useEffect(() => {
@@ -26,19 +27,39 @@ const ModalPage = () => {
     fetchFullDeatails();
   }, []);
   return (
-    <div className="w-full p-4">
-      <div className="space-y-5 ">
+    <div className="w-full flex justify-center p-4">
+      <div className="space-y-5 row col-12 col-md-6">
+        {/* <p>{profile.profileImage}</p> */}
+        <div className="flex justify-center">
+          <img
+            src={`http://192.168.117.43:5000${profile.profileImage}`}
+            alt="profile"
+            style={{
+              width: "200px",
+              height: "200px",
+              objectFit: "fill",
+              borderRadius: "50%",
+            }}
+          
+          />
+          <a className="mt-30" href="?action=image">edit</a>
+        </div>
         <div className="border p-3 rounded">
           <div className="flex justify-between items-center ">
             <h6>Basic Details</h6>
-         <button onClick={()=>router.push("?action=basic-details",{scroll:false})}>Edit</button>
+            <button
+              onClick={() =>
+                router.push("?action=basic-details", { scroll: false })
+              }
+            >
+              Edit
+            </button>
           </div>
           <div className="flex justify-between ">
             <span>
               {profile.firstName} {profile.lastName}
             </span>
             <span>{profile.email}</span>
-          
           </div>
         </div>
         <div className="border p-3 rounded">
@@ -55,7 +76,13 @@ const ModalPage = () => {
         <div className=" border p-3 rounded">
           <div className="flex justify-between items-center">
             <h6>Education</h6>
-           <button onClick={()=>router.push("?action=education",{scroll:false})}>Edit</button>
+            <button
+              onClick={() =>
+                router.push("?action=education", { scroll: false })
+              }
+            >
+              Edit
+            </button>
           </div>
           <div>
             {profile.education?.length > 0 ? (
@@ -74,13 +101,17 @@ const ModalPage = () => {
         <div className="border p-3 rounded">
           <div className="flex justify-between items-center ">
             <h6>Skills</h6>
-          <button onClick={()=>router.push("?action=skills",{scroll:false})}>Edit</button>
+            <button
+              onClick={() => router.push("?action=skills", { scroll: false })}
+            >
+              Edit
+            </button>
           </div>
           <div className="flex flex-wrap gap-2">
             {profile.skills?.map((skill, index) => (
               <div
                 key={index}
-                className="border  text-light border-white py-1 px-2 rounded text-sm bg-gray-700"
+                className="border text-light border-white py-1 px-2 rounded text-sm bg-gray-700"
               >
                 {skill}
               </div>
@@ -93,56 +124,15 @@ const ModalPage = () => {
         </div>
       </div>
       {action && (
-  <EditProfile action={action} profile={profile} onclose={closeModal}
-    updateProfile={(fields) =>
-    setProfile((prev) => ({ ...prev, ...fields }))
-  }
-  
-  />
-)}
-
-      {/* <EditProfile action="profile"/> */}
-      {/* {action === "profile" && (
-        <CustomModal items="profile" onClose={closeModal}>
-          <div className="space-y-3">
-            <input
-              type="text"
-               value={formData.summary}
-              className="w-full p-2 border rounded"
-              placeholder="Enter profile details"
-            />
-          </div>
-        </CustomModal>
+        <EditProfile
+          action={action}
+          profile={profile}
+          onclose={closeModal}
+          updateProfile={(fields) =>
+            setProfile((prev) => ({ ...prev, ...fields }))
+          }
+        />
       )}
-      {action === "education" && (
-        <CustomModal items="education" onClose={closeModal} >
-          <div className="space-y-3">
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter new education details"
-            />
-          </div>
-        </CustomModal>
-      )}
-      {action === "skills" && (
-        <CustomModal items="skills" onClose={closeModal}>
-          <input
-            type="text"
-            placeholder="enter your skills"
-            className="w-full p-2 border rounded "
-          />
-        </CustomModal>
-      )}
-      {action === "experience" && (
-        <CustomModal items="experience" onClose={closeModal}>
-          <input
-            type="text"
-            placeholder="enter  details"
-            className="w-full border rounded p-2"
-          />
-        </CustomModal>
-      )} */}
     </div>
   );
 };

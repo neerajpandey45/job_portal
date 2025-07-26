@@ -10,38 +10,38 @@ const UserLayout = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isOpenSide, setIsOpenSide] = useState(false);
   const router = useRouter();
-  const pathname=usePathname();
+  const pathname = usePathname();
   const toggleSidebar = () => {
     setIsOpenSide(!isOpenSide);
   };
-
- useEffect(() => {
-  const checkAuth = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.log("❌ No token found. Redirecting to login...");
-      router.replace("/login/users");
-      return;
-    }
-    try {
-      const res = await axiosInstance.get("/users/check");
-      if (res.status === 200 && res.data.authenticated) {
-        console.log("✅ Authenticated successfully.");
-        setIsAuthenticated(true);
-      } else {
-        console.log("❌ Authentication failed. Redirecting...");
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
         router.replace("/login/users");
+        return;
       }
-    } catch (error) {
-      console.log("❌ Error during auth check:", error.response?.data || error.message);
-      router.replace("/login/users");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  checkAuth();
-}, [router]);
+      try {
+        const res = await axiosInstance.get("/users/check");
+        if (res.status === 200 && res.data.authenticated) {
+          console.log("✅ Authenticated successfully.");
+          setIsAuthenticated(true);
+        } else {
+          console.log("❌ Authentication failed. Redirecting...");
+          router.replace("/login/users");
+        }
+      } catch (error) {
+        console.log(
+          "❌ Error during auth check:",
+          error.response?.data || error.message
+        );
+        router.replace("/login/users");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    checkAuth();
+  }, [router]);
 
   if (isLoading) {
     return (
@@ -66,17 +66,19 @@ const UserLayout = ({ children }) => {
             <Sidebar setOpenSide={setIsOpenSide} />
           </div>
         )}
-       
-        <main className="w-full overflow-y-scroll" style={{ scrollbarWidth: "none" }}>
+
+        <main
+          className="w-full overflow-y-scroll"
+          style={{ scrollbarWidth: "none" }}
+        >
           {children}
         </main>
       </div>
-       { pathname ==="/userHomepage" &&(
+      {pathname === "/userHomepage" && (
         <div className="md:hidden">
-        <Footer />
-      </div>
-       )
-       }
+          <Footer />
+        </div>
+      )}
     </div>
   );
 };

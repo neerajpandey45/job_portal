@@ -6,7 +6,7 @@ const LocationState = () => {
   const [enterText, setEnterText] = useState("");
   const [stateName, setStateName] = useState([]);
   const [showLabel, setLabel] = useState(false);
-  const handleLable = () => {
+  const handleLabel = () => {
     setLabel(true);
   };
   const handleInput = (e) => {
@@ -37,7 +37,7 @@ const LocationState = () => {
           className="w-full outline-none px-3"
           value={enterText}
           onChange={handleInput}
-          onClick={handleLable}
+          onClick={handleLabel}
         />
         <hr></hr>
         <div className="w-full flex justify-end pr-4">

@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
         <div id="backdrop"></div>
         <div id="overlay"></div>
         <div>
-          {children}
+            {children}
           <ToastContainer position="top-center" autoClose={2000} />
         </div>
       </body>

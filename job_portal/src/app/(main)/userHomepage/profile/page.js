@@ -4,6 +4,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 const UserProfile = ({ isOpen, toggleProfile }) => {
   const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true); 
+    const [err,setError]=useState(false);
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -11,13 +13,23 @@ const UserProfile = ({ isOpen, toggleProfile }) => {
         });
       
         setUser(res.data);
+        setError(false);
       } catch (err) {
         console.log("user not found", err);
+        setError(true);
+      }finally{
+        setLoading(false);
       }
     };
     fetchUserProfile();
   }, []);
-
+ if (loading) {
+    return (
+      <div className="fixed w-25 h-screen top-0 right-0 shadow bg-white text-black p-4 z-50">
+        <p>Loading...</p>
+      </div>
+    );
+  }
   if (!user)
     return (
       <p className="text-center text-danger">

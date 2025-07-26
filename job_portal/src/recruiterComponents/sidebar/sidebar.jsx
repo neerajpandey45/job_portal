@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 const RecruiterSidebar = ({setOpenSide}) => {
   const [open, setopen] = useState(false);
-  console.log(setOpenSide);
+  // console.log(setOpenSide);
   const router = useRouter();
   return (
     <div className="w-full md:w-[20vw] min-h-[100vh] bg-white z-999 shadow cursor-pointer">

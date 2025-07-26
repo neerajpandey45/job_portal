@@ -1,16 +1,21 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-
+// import { useTheme } from "@/utils/screenTheme/themeContext";
 const Sidebar = ({ setOpenSide }) => {
+  // const {isDark,toggleTheme}=useTheme();
   const [openMenu, setOpenMenu] = useState(false);
-
   return (
     <div className="w-full flex flex-wrap ">
       <div className="w-full md:w-[20vw] min-h-[100vh] shadow p-3 cursor-pointer ">
-        <div className="w-full flex gap-4 h-[10vh]">
+        <div className="w-full flex gap-4 ">
           <i className="bi bi-person-circle"></i>
-          <h5>Profile</h5>
+          <h5>
+            <Link href="/userHomepage/userFullDetails" className="text-decoration-none text-reset ">
+              Profile
+            </Link>
+          </h5>
+
           <div className="md:hidden flex justify-end w-full text-danger">
             <i
               className="bi bi-x-circle-fill"
@@ -19,7 +24,7 @@ const Sidebar = ({ setOpenSide }) => {
           </div>
         </div>
         <div>
-          <ul className="text-break list-none m-0 p-0 space-y-5">
+          <ul className="text-break list-none m-0 p-0 space-y-5 mt-2">
             <li>
               <Link
                 href="/userHomepage/search"
@@ -55,7 +60,10 @@ const Sidebar = ({ setOpenSide }) => {
             <li className="flex gap-3">
               <i className="bi bi-duffle"></i>Jobseeker services
             </li>
-            <Link href="/userHomepage/photo" className="flex gap-3">
+            <Link
+              href=""
+              className="flex gap-3 text-decoration-none text-reset"
+            >
               <i className="bi bi-list-ul"></i>Naukri blog
             </Link>
             {/* <li className="flex gap-3">

@@ -3,8 +3,9 @@ import CustomModal from "@/utils/customModel/customModel";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const EditProfile = ({ action, profile, onclose, updateProfile }) => {
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [formData, setFormData] = useState({});
-
   if (!action || !profile) return null;
   useEffect(() => {
     if (action === "profile") {
@@ -13,6 +14,11 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
     if (action === "skills") {
       setFormData({
         skills: profile.skills?.join(", ") || "",
+      });
+    }
+    if (action === "image") {
+      setFormData({
+        image: profile.image || "",
       });
     }
     if (action === "education") {
@@ -29,6 +35,33 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const editSection = () => {
+    if (action === "image") {
+      return (
+        <div className="space-y-3">
+          <input
+            type="file"
+            accept="image/*"
+            className="border rounded-3 py-2 w-full px-2"
+            onChange={(e) => {
+              const selected = e.target.files[0];
+              if (selected && selected.size > 1 * 1024 * 1024) {
+                alert("Image must be less than 2MB");
+                return;
+              }
+              setFile(selected);
+              setPreview(URL.createObjectURL(selected));
+            }}
+          />
+          {preview && (
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-[150px] h-[150px] rounded-full object-cover"
+            />
+          )}
+        </div>
+      );
+    }
     if (action === "profile") {
       return (
         <input
@@ -37,7 +70,7 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
           placeholder="enter profile details"
           value={formData.summary || ""}
           onChange={handleChange}
-          className="w-full border rounded-2"
+          className="w-full border rounded-2 text-sm font-medium py-1"
         />
       );
     }
@@ -50,7 +83,7 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
             value={formData.degree || ""}
             onChange={handleChange}
             placeholder="Enter degree"
-            className="w-full border rounded-2 mb-2"
+            className="w-full border rounded-2 mb-2 text-sm font-medium py-1"
           />
           <input
             type="text"
@@ -58,7 +91,7 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
             value={formData.institution || ""}
             onChange={handleChange}
             placeholder="Enter institution"
-            className="w-full border rounded-2"
+            className="w-full border rounded-2 text-sm font-medium py-1"
           />
         </>
       );
@@ -69,7 +102,7 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
           type="text"
           name="skills"
           placeholder="enter skills"
-          className="w-full border rounded"
+          className="w-full border rounded text-sm font-medium py-1"
           value={formData.skills || ""}
           onChange={handleChange}
         />
@@ -96,15 +129,15 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
         };
         await axiosInstance.put("/users/add/education", updatedData);
       }
-   if (formData.skills && action === "skills") {
-  updatedData = {
-    skills: formData.skills
-      .split(",")
-      .map((skill) => skill.trim()) // Convert comma string to array
-      .filter((skill) => skill)     // Remove empty strings
-  };
-  await axiosInstance.put("/users/add/skills", updatedData);
-}
+      if (formData.skills && action === "skills") {
+        updatedData = {
+          skills: formData.skills
+            .split(",")
+            .map((skill) => skill.trim()) // Convert comma string to array
+            .filter((skill) => skill), // Remove empty strings
+        };
+        await axiosInstance.put("/users/add/skills", updatedData);
+      }
       // Update the profile in the parent component (to reflect changes immediately)
       updateProfile(updatedData);
       toast.success("Updated successfully!");
@@ -113,9 +146,23 @@ const EditProfile = ({ action, profile, onclose, updateProfile }) => {
       console.error("Error:", err);
       toast.error("Failed to update profile");
     }
+    let updatedData = {};
+
+    if (action === "image" && file) {
+      if (!file) return alert("Select an image");
+      const formData = new FormData();
+      formData.append("profileImage", file);
+
+      const res = await axiosInstance.post("/uploads/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      updatedData = {
+        profileImage: res.data.profileImage,
+      };
+    }
   };
   //   console.log(formData);
-
   return (
     <div>
       <CustomModal
