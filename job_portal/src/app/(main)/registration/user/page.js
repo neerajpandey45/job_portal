@@ -119,10 +119,8 @@ const UserRegistration = () => {
               onClick={() => setShowPass(!showPass)}
             ></i>
           </div>
-
           {error && <p className="text-red-500">{error}</p>}
           {success && <p className="text-green-600">{success}</p>}
-
           <div className="mb-3">
             <button
               type="submit"

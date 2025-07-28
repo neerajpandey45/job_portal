@@ -76,15 +76,15 @@ const Sidebar = ({ setOpenSide }) => {
               <i className="bi bi-question-circle"></i>How jobportal works
             </li>
 
-            <li>
+            {/* <li> */}
               <Link
                 href="/userHomepage/about"
                 className="flex gap-3 text-decoration-none text-reset"
               >
-                <i className="bo bi-info-circle"></i>
+                <i className="bi bi-info-circle"></i>
                 About us
               </Link>
-            </li>
+            {/* </li> */}
             <div className="">
               <li
                 className="flex gap-3 items-center "

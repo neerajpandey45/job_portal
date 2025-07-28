@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.117.43:5000/api", // 🔁 Base URL for all requests
+  baseURL: "http://192.168.30.43:5000/api", // 🔁 Base URL for all requests
 });
 // ✅ Interceptor to attach token automatically
 axiosInstance.interceptors.request.use((config) => {

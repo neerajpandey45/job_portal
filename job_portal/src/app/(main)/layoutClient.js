@@ -29,7 +29,6 @@ const UserLayout = ({ children }) => {
           console.log("✅ Authenticated successfully.");
           setIsAuthenticated(true);
         } else {
-          console.log("❌ Authentication failed. Redirecting...");
           router.replace("/login/users");
         }
       } catch (error) {
