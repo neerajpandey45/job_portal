@@ -22,7 +22,7 @@ export default function Recruiter() {
       setIsLoading(true);
       setTimeout(() => {
         router.push("/recruiterHomepage");
-      }, 4000);
+      }, 2000);
     } catch (err) {
       if (err.response?.status === 404) {
         toast.error("User not found");
@@ -44,7 +44,7 @@ export default function Recruiter() {
       </div>
       <div className="container">
         <div className="row flex justify-center">
-          <div className="col-12 col-md-6 col-lg-5  p-2">
+          <div className="col-12 col-sm-10 col-md-6 col-lg-6 col-xl-4 mx-auto">
             <form
               className="flex flex-col min-h-[40vh] py-4 gap-3 shadow bg-white rounded-3"
               onSubmit={handle}

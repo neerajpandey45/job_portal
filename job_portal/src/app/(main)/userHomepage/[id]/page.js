@@ -26,7 +26,7 @@ const JobDetailsPage = () => {
     <>
       <div className="container">
         <div className="row justify-center ">
-          <div className="col-10 shadow mt-2 rounded-3 p-3 mb-4">
+          <div className="col-10 shadow mt-2 rounded-3 p-3 mb-4 ">
             <h3>{job.title}</h3>
             <h6>{job.companyName}</h6>
             <div className="flex gap-2">

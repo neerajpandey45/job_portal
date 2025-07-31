@@ -8,7 +8,6 @@ const ModalPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const action = searchParams.get("action");
-
   const closeModal = () => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.delete("action");

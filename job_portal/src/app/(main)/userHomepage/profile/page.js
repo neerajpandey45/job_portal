@@ -1,6 +1,5 @@
 "use client";
 import axiosInstance from "@/services/axiosInstance";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 const UserProfile = ({ isOpen, toggleProfile }) => {
   const [user, setUser] = useState(null);
@@ -23,6 +22,7 @@ const UserProfile = ({ isOpen, toggleProfile }) => {
     };
     fetchUserProfile();
   }, []);
+  if (!isOpen) return null; 
  if (loading) {
     return (
       <div className="fixed w-25 h-screen top-0 right-0 shadow bg-white text-black p-4 z-50">

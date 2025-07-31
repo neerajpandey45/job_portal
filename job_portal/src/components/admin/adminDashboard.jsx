@@ -1,81 +1,71 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic"; // Import dynamic from Next.js
 import axiosInstance from "@/services/axiosInstance";
-const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 const AdminDashboard = () => {
   const [recuiter, setRecruiter] = useState([]);
-  const [user,setUser]=useState([]);
+  const [user, setUser] = useState([]);
   useEffect(() => {
-    const fetchRecruiter = async () => {
+    const fetchData = async () => {
       try {
-        const res=await axiosInstance.get("/admin/allRecruiters");
-          setRecruiter(res.data);
+        const [recruiteRes, userRes] = await Promise.all([
+          axiosInstance.get("/admin/allRecruiters"),
+          axiosInstance.get("admin/allUsers"),
+        ]);
+        setRecruiter(recruiteRes.data);
+        setUser(userRes.data);
       } catch (err) {
         console.log("err", err);
       }
     };
-    fetchRecruiter();
-  }, []);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res=await axiosInstance.get("/admin/allUsers");
-          setUser(res.data);
-      } catch (err) {
-        console.log("err", err);
-      }
-    };
-    fetchUsers();
+    fetchData();
   }, []);
   const series = [
     {
       name: "Recruiters",
-      data: [10, 20, 30, 25, 35, 40],
+      data: [recuiter.length],
     },
     {
       name: "Users",
-      data: [50, 60, 80, 90, 110, 130],
-    },
-    {
-      name: "New Users",
-      data: [5, 10, 20, 15, 25, 30],
+      data: [user.length],
     },
   ];
   const options = {
     chart: {
       type: "bar",
       zoom: { enabled: true },
-      toolbar: { show: false },
+      toolbar: { show: true },
     },
     plotOptions: {
       bar: {
         borderRadius: 4,
-        columnWidth: "20%",
+        columnWidth: "10%",
       },
     },
-    dataLabels: { enabled: false },
+    dataLabels: { enabled: true },
     stroke: {
       show: true,
       width: 2,
       colors: ["transparent"],
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      categories: ["total data"],
     },
     tooltip: {
-      shared: true,
-      intersect: false,
+      shared: false,
+      intersect: true,
     },
-    colors: ["#008FFB", "#00E396", "#FEB019"],
+    colors: ["#008FFB", "#FEB019"],
     legend: {
       position: "top",
-      horizontalAlign: "right",
+      horizontalAlign: "center",
     },
   };
   return (
-    <div className="w-full bg-white p-4 rounded shadow ">
+    <div className="w-full">
       <div className="flex justify-center gap-5 mb-2">
         <h5 className="bg-blue-600 py-2 p-3 text-white rounded-5">
           Total Recruiter:
@@ -86,12 +76,16 @@ const AdminDashboard = () => {
         </h5>
       </div>
       <h6 className="text-center mb-3 font-bold">User Growth Overview</h6>
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={350}
-      />
+      <div className="flex justify-center">
+        <div className="bg-white p-4 rounded shadow w-[50%]">
+          <ReactApexChart
+            options={options}
+            series={series}
+            type="bar"
+            height={350}
+          />
+        </div>
+      </div>
     </div>
   );
 };

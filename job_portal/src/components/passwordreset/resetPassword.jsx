@@ -3,6 +3,7 @@ import axiosInstance from "@/services/axiosInstance";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { isValidGmail } from "@/utils/formValidation.js/formValidation";
 const ResetPassword = () => {
   const router = useRouter();
   const [otpVerify, setOtpVerify] = useState("");
@@ -13,30 +14,44 @@ const ResetPassword = () => {
   const [cnfPassword, setcnfPassword] = useState("");
   const handleSendOtp = async (e) => {
     e.preventDefault();
+  if(!isValidGmail(email)){
+    toast.error("please enter gmail")
+    return null
+  }
     try {
       const res = await axiosInstance.post("/users/send-otp", {
         email,
       });
-      toast.success("otp sent");
-    } catch (err) {
-      const status=err?.response?.status
-      if(status===400) {
-        toast.error("please enter valid username")
+      if (res.status === 200) {
+        toast.success("OTP sent successfully");
       }
-      else if(status===404){
-        toast.error("user not found")
+      // toast.success("otp sent");
+    } catch (err) {
+      const status = err?.response?.status;
+      if (status === 400) {
+        toast.error("please enter valid username");
+      } else if (status === 404) {
+        toast.error("user not found");
+      } else if (status === 403) {
+        toast.error("not allowed for admin ");
       }
       console.log("error", err);
     }
   };
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
+    const otpRegex = /^\d{6}$/; // exactly 6 digits
+
+    if (!otpRegex.test(otp)) {
+      toast.error("Please enter a valid 6-digit numeric OTP.");
+      return;
+    }
     try {
       const res = await axiosInstance.post("/users/verify-otp", { email, otp });
       toast.success("verify successfully");
       setOtpVerify(true);
     } catch (err) {
-      toast.error("please enter valid otp")
+      toast.error("please enter valid otp");
       console.log("failed to verify", err);
     }
   };
@@ -78,7 +93,10 @@ const ResetPassword = () => {
             />
           </div>
           <div>
-            <button onClick={handleSendOtp} className="btn btn-primary btn-sm w-full">
+            <button
+              onClick={handleSendOtp}
+              className="btn btn-primary btn-sm w-full"
+            >
               send otp
             </button>
           </div>

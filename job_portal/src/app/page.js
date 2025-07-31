@@ -7,21 +7,14 @@ export default function Home() {
   const handleUser = () => {
     router.push("/login/users");
   };
-  const handleAdmin = () => {
-    router.push("/login/admin");
-  };
   const handleRecruiter = () => {
     router.push("/login/recruiter");
-
   };
   return (
     <div className="full w-max min-w-full">
       <div className="flex justify-between px-4 py-2 bg-gray-800 text-white">
         <div className="flex gap-5">
-          <p className="cursor-pointer" onClick={handleAdmin}>
-            Adminlogin
-          </p>
-          <p className="cursor-pointer">About</p>
+          <p className="cursor-pointer">Home</p>
         </div>
         <div className="flex gap-3">
           <div className="flex gap-1">

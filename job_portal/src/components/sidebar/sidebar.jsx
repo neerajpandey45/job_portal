@@ -92,6 +92,9 @@ const Sidebar = ({ setOpenSide }) => {
               >
                 <i className="bi bi-gear"></i> Settings
               </li>
+              <Link href="/userHomepage/resume">
+              resume
+              </Link>
               {openMenu && (
                 <ul className="cursor-pointer mt-2 space-y-3">
                   <Link href="/userHomepage/logoutUser">

@@ -15,14 +15,21 @@ const UsersLogin = () => {
       email: e.target.email.value,
       password: e.target.password.value,
     };
+    console.log(data);
     try {
       const res = await axiosInstance.post("/users/login", data);
-      localStorage.setItem("token", res.data.token);
+        const { token, user } = res.data;
+      localStorage.setItem("token", token);
       toast.success("Login successful!");
       setIsLoading(true);
       setTimeout(() => {
+       if(user.role==="admin"){
+        router.push("/login/admin")
+       }
+       else if(user.role==="user"){
         router.push("/userHomepage");
-      }, 5000);
+       }
+      },1000);
     } catch (err) {
       if (err.response?.status === 404) {
         toast.error("User not found.");
@@ -83,7 +90,7 @@ const UsersLogin = () => {
                 <i
                   className={`bi ${
                     showPass ? "bi-eye-slash" : "bi-eye"
-                  } absolute top-[38px] right-4 cursor-pointer`}
+                  } absolute right-3 top-1/2 transform-translate-y-1/2 cursor-pointer`}
                   onClick={() => setShowPass(!showPass)}
                 ></i>
               </div>
