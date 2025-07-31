@@ -19,8 +19,10 @@ exports.sendOtp = async (req, res) => {
     // 1️⃣ Find user by email
 
     const user = await User.findOne({ email });
-
     if (!user) return res.status(404).json({ msg: "User not found" });
+    if (user.role !== "user") {
+    return res.status(403).json({ error: "Not allowed to reset password from this route" });
+  }
     const otp = generateNumericOtp(6);
       console.log(otp);
     //3️⃣ Set expiry for 5 minutes
@@ -41,6 +43,9 @@ exports.verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
   try {
     const user = await User.findOne({ email });
+    if (user.role !== "user") {
+  return res.status(403).json({ error: "Not allowed " });
+}
     if (!user || user.otp !== otp || user.otpExpiry < Date.now())
      {
       return res.status(400).json({ msg: "Invalid or expired OTP" });
@@ -59,7 +64,9 @@ exports.resetPassword = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ msg: "User not found" });
-
+if (user.role !== "user") {
+  return res.status(403).json({ error: "Not allowed to reset password from this route" });
+}
      if (!user.isOtpVerified) {
       return res.status(401).json({ msg: "OTP verification required" });
     }

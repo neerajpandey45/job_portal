@@ -15,7 +15,9 @@ console.log("Extracted Token:", token);
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log("✅ Decoded JWT:", decoded);
-    req.userId = decoded.userId; // or req.user = decoded;
+    // req.userId = decoded.userId; // or req.user = decoded;
+    req.user=decoded;
+    req.userId = decoded.userId; 
     next();
   } catch (err) {
     return res.status(401).json({ error: "Token is invalid or expired" });

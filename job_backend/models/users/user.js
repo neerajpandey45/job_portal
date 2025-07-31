@@ -59,6 +59,11 @@ const userSchema = new mongoose.Schema({
       link: String,
     },
   ],
+   role:{
+  type: String,
+  enum: ["user", "admin"], // adjust based on your portal
+  default: "user",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

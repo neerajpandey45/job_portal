@@ -18,7 +18,6 @@ const recruiterRoute=require("./routes/recruiters/recruiter");
 const jobRoute=require("./routes/jobPost/jobPost");
 const allRecruiterApplications=require("./routes/recruiterARoutes/applicationRoutes");
 // for admin
-const allRecruiter=require("./routes/admin/adminRoutes");
 const allUsers=require("./routes/admin/adminRoutes");
 const cookieParser=require("cookie-parser");
 dotenv.config();
@@ -26,7 +25,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:3000",
-  "http://192.168.117.43:3000", // ✅ your laptop's IP (accessed by mobile)
+  "http://192.168.30.43:3000", // ✅ your laptop's IP (accessed by mobile)
 ];
 // Middlewares
 app.use(cors({
@@ -60,8 +59,8 @@ app.use("/api/jobs",jobRoute); // for jobs posting and recruiter can see their p
 app.use("/api/recruiters/applications",allRecruiterApplications); // recruiter see users application on their jobs
 app.use("/api/recruiter/delete",jobRoute);// for delete job
 //for admin
-app.use("/api/admin",allRecruiter);
 app.use("/api/admin",allUsers);
+
 // Connect DB and Start Server
 connectMongoDB(process.env.MONGO_URI).then(() => {
   app.listen(PORT,'0.0.0.0', () => {

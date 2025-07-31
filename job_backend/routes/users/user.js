@@ -4,7 +4,8 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../../controllers/users/userControllers");
 const authenticateToken = require("../../middlewares/authUsers");
-router.get("/check", authenticateToken, (req, res) => {
+const authorizeRoles=require("../../middlewares/roleBase");
+router.get("/check", authenticateToken,authorizeRoles("user"), (req, res) => {
    console.log("✅ Auth route success for userId:", req.userId);
   res.json({ authenticated: true, userId: req.user });
 });
