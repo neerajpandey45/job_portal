@@ -24,7 +24,7 @@ exports.sendOtp = async (req, res) => {
     return res.status(403).json({ error: "Not allowed to reset password from this route" });
   }
     const otp = generateNumericOtp(6);
-      console.log(otp);
+      // console.log(otp);
     //3️⃣ Set expiry for 5 minutes
     const expiry = new Date(Date.now() + 5 * 60 * 1000); // store as Date object
     // 4️⃣ Update user document
@@ -35,7 +35,7 @@ exports.sendOtp = async (req, res) => {
     await sendEmailWithOtp(email, otp);
     res.status(200).json({ msg: "OTP sent successfully to your email." });
   } catch (err) {
-    console.error("❌ Error in sendOtp:", err.message);
+    // console.error("❌ Error in sendOtp:", err.message);
     res.status(500).json({ msg: "Failed to send OTP. Please try again later." });
   }
 };

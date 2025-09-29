@@ -6,7 +6,7 @@ const userController = require("../../controllers/users/userControllers");
 const authenticateToken = require("../../middlewares/authUsers");
 const authorizeRoles=require("../../middlewares/roleBase");
 router.get("/check", authenticateToken,authorizeRoles("user"), (req, res) => {
-   console.log("✅ Auth route success for userId:", req.userId);
+  //  console.log("✅ Auth route success for userId:", req.userId);
   res.json({ authenticated: true, userId: req.user });
 });
 // // GET /api/users
@@ -21,10 +21,9 @@ router.get("/profile", authenticateToken, async (req, res) => {
   res.status(200).json(userProfile);
 });
 router.get("/fullDetails",authenticateToken,userController.UserFullDeatils);
-//  router.post("/education",authenticateToken,userController.updateEducation); 
  router.put("/add/education",authenticateToken,userController.updateEducation);
 router.post("/logout",userController.logoutUser);
 router.put("/add/summary",authenticateToken ,userController.addSummary);
 router.put("/add/skills",authenticateToken,userController.addSkills);
-
+router.delete("/delete/education/:id",authenticateToken,userController.deleteEducationById);
 module.exports = router;

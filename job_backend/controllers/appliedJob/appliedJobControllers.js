@@ -36,7 +36,7 @@ exports.applyJob = [
     await application.save();
     return res.status(200).json({msg:"successfully applied"})
   } catch (err) {
-      console.error("Application error:", err);
+      // console.error("Application error:", err);
     res.status(500).json({ msg: "Application failed", error: err.message });
   }
 },
@@ -48,7 +48,7 @@ exports.getAllAppliedJobs = async (req, res) => {
 
     res.status(200).json(allJobs); // ✅ return all, even if jobId is null
   } catch (err) {
-    console.log("error", err);
-    res.status(500).json({ msg: "Something went wrong" });
+    // console.log("error", err);
+    res.status(500).json({ msg: "Something went wrong" ,error: err.message });
   }
 };

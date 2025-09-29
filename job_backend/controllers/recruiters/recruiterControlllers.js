@@ -39,7 +39,7 @@ exports.createRecruiter = async (req, res) => {
       return res.status(400).json({ error: "Passwords do not match." });
     }
     // ✅ Hash password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     const newRecruiter = new Recruiter({
       firstName,
@@ -49,15 +49,13 @@ exports.createRecruiter = async (req, res) => {
       pincode,
       state,
       email,
-      password: hashedPassword, // ✅ hashed
-      confirmPassword
+      password,
+      confirmPassword,
     });
-
     await newRecruiter.save();
-
     res.status(201).json({ message: "Recruiter created successfully." });
   } catch (error) {
-    console.error("Error creating recruiter:", error);
+    // console.error("Error creating recruiter:", error);
     res.status(500).json({ error: "Server error. Please try again later." });
   }
 };
@@ -66,15 +64,15 @@ exports.loginRecruiter = async (req, res) => {
     const { email, password } = req.body;
 
     const recruiter = await Recruiter.findOne({ email });
+
     if (!recruiter) {
       return res.status(400).json({ error: "User not found" });
     }
-
     const isMatch = await bcrypt.compare(password, recruiter.password);
+
     if (!isMatch) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
-
     // ✅ Create JWT token
     const token = jwt.sign(
       { recruiterId: recruiter._id },
@@ -84,7 +82,7 @@ exports.loginRecruiter = async (req, res) => {
     // ✅ Send basic recruiter data
     res.status(200).json({
       message: "Login successful",
-      token,//frontend will store this
+      token, //frontend will store this
       recruiter: {
         id: recruiter._id,
         firstName: recruiter.firstName,

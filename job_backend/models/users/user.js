@@ -40,6 +40,8 @@ const userSchema = new mongoose.Schema({
       institution: String,
       startYear: Number,
       endYear: Number,
+      score: String,
+
     },
   ],
   experience: [

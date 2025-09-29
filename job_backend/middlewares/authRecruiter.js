@@ -6,8 +6,8 @@ const authRecruiter = (req, res, next) => {
   }
   const token = authHeader.split(" ")[1];
   if (!token) {
-    console.log("authorization",authHeader);
-    console.log("recruiter authentication token",token);
+    // console.log("authorization",authHeader);
+    // console.log("recruiter authentication token",token);
     return res.status(401).json({ error: "No token found" });
   }
   try {
@@ -15,7 +15,7 @@ const authRecruiter = (req, res, next) => {
     req.recruiterId = decoded.recruiterId;
     next();
   } catch (err) {
-    console.log("Invalid token");
+    // console.log("Invalid token");
     res.status(401).json({ error: "Token is invalid" });
   }
 };

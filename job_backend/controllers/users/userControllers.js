@@ -32,7 +32,6 @@ exports.createUser = async (req, res) => {
         "Password must be in format: letters + one special character + numbers (e.g. Neeraj@3000), 8–15 characters long.",
       });
     }
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "user already exits" });
@@ -46,7 +45,7 @@ exports.createUser = async (req, res) => {
 
     res.status(201).json(userWithoutPassword);
   } catch (err) {
-    console.error("created user error", err);
+    // console.error("created user error", err);
     if (err.name === "validationError") {
       return res.status(400).json({ error: err.message });
     }
@@ -87,14 +86,37 @@ exports.updateEducation = async (req, res) => {
   const { education } = req.body;
   try {
     const user = await User.findById(req.userId);
-    console.log(user);
-    user.education = education; // expects array of objects [{degree, institution}]
+    // console.log(user);
+     const updatedEducation = education.map((edu) => ({
+      ...edu,
+      startYear: new Date(edu.startYear),
+      endYear: new Date(edu.endYear),
+    }));
+
+    user.education = updatedEducation; // expects array of objects [{degree, institution}]
     await user.save();
     res
       .status(200)
       .json({ message: "Education updated", education: user.education });
   } catch (err) {
     res.status(500).json({ error: "Failed to update education" });
+  }
+};
+// In controllers/userController.js
+exports.deleteEducationById = async (req, res) => {
+  const eduId = req.params.id;
+
+  try {
+    const user = await User.findById(req.userId);
+    const edu = user.education.id(eduId);
+    if (!edu) return res.status(404).json({ error: "Education not found" });
+    // edu.remove()
+    user.education.pull({ _id: eduId });
+    await user.save();
+    res.status(200).json({ message: "Education deleted", education: user.education });
+  } catch (err) {
+    // console.error("Error deleting education:", err);
+    res.status(500).json({ error: "Failed to delete education" });
   }
 };
 

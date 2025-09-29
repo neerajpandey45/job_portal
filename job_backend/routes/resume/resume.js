@@ -18,7 +18,7 @@ router.get("/download", (req, res) => {
     fileName
   );
 
-  console.log("Resolved absolute path:", absolutePath);
+  // console.log("Resolved absolute path:", absolutePath);
 
   if (fs.existsSync(absolutePath)) {
     res.download(absolutePath, fileName, (err) => {
@@ -28,7 +28,7 @@ router.get("/download", (req, res) => {
       }
     });
   } else {
-    console.log("File not found at:", absolutePath);
+    // console.log("File not found at:", absolutePath);
     res.status(404).send("File not found");
   }
 });

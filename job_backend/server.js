@@ -25,7 +25,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:3000",
-  "http://192.168.30.43:3000", // ✅ your laptop's IP (accessed by mobile)
+  "http://10.233.38.43:3000", // ✅ your laptop's IP (accessed by mobile)
 ];
 // Middlewares
 app.use(cors({
