@@ -23,18 +23,30 @@ const cookieParser=require("cookie-parser");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
+// const allowedOrigins = [
+//  "https://job-portal-theta-lemon.vercel.app",
+//  ];
+// app.use(cors({
+//    origin: allowedOrigins, // Your frontend domain
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//  credentials: true, // 👈 allows cookies to be sent from frontend
+//  allowedHeaders: ["Authorization", "Content-Type"],
+// }));
+
 const allowedOrigins = [
+  "http://localhost:3000",
   "https://job-portal-theta-lemon.vercel.app"
-  //  origin: "https://job-portal-theta-lemon.vercel.app"// your frontend URL
-  // "http://localhost:3000",
-  // "http://10.233.38.43:3000", // ✅ your laptop's IP (accessed by mobile)
 ];
-// Middlewares
+
 app.use(cors({
-  origin: allowedOrigins, // Your frontend domain
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true, // 👈 allows cookies to be sent from frontend
-  allowedHeaders: ["Authorization", "Content-Type"],
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // Postman, curl
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error(`CORS error: ${origin}`), false);
+  },
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Authorization","Content-Type"],
+  credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser()); 
