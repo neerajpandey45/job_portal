@@ -34,10 +34,10 @@ const PORT = process.env.PORT || 5000;
 // }));
 
 const allowedOrigins = [
-   "http://localhost:3000",
-  /^https:\/\/.*\.vercel\.app$/ 
+  //  "http://localhost:3000",
+  // /^https:\/\/.*\.vercel\.app$/ 
   // "http://localhost:3000",
-//  "https://job-portal-theta-lemon.vercel.app/"
+ "https://job-portal-theta-lemon.vercel.app/"
 ];
 app.use(cors({
   origin: function(origin, callback) {
