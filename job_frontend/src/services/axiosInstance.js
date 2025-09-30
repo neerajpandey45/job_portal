@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://job-portal-c0iw.onrender.com/api", // 🔁 Base URL for all requests
+   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  // baseURL: "http://job-portal-c0iw.onrender.com/api", // 🔁 Base URL for all requests
 });
 // ✅ Interceptor to attach token automatically
 axiosInstance.interceptors.request.use((config) => {

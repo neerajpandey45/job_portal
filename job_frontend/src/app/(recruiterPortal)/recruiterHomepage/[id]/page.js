@@ -26,7 +26,8 @@ const AllApplications = () => {
       alert("Resume not uploaded");
       return;
     }
-    const fullURL = `http://10.159.136.43:5000${resumePath}`;
+    const fullURL=`${process.env.NEXT_PUBLIC_API_URL}/resume/${resumePath}`;
+    // const fullURL = `http://10.159.136.43:5000${resumePath}`;
     window.open(fullURL, "_blank", "noopener,noreferrer");
   };
   // console.log(application)
@@ -55,7 +56,8 @@ const AllApplications = () => {
               View Resume
             </button>
             <a
-              href={`http://192.168.117.43:5000/api/resume/download?path=${applicant.resume}`}
+               href={`${process.env.NEXT_PUBLIC_API_URL}/resume/download?path=${applicant.resume}`}
+              // href={`http://192.168.117.43:5000/api/resume/download?path=${applicant.resume}`}
               download
               className="btn btn-primary"
             >
