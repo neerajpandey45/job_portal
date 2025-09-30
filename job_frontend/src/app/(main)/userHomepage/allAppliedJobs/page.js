@@ -22,7 +22,7 @@ const UserAppliedJobs = () => {
 
   if (appliedJobs.length === 0)
     return (
-      <p className="text-center mt-4">You haven't applied to any jobs yet.</p>
+      <p className="text-center mt-4">You haven&apos;applied to any jobs yet.</p>
     );
   return (
     <div className="container mt-4">

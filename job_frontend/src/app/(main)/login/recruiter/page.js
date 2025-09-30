@@ -2,7 +2,7 @@
 import axiosInstance from "@/services/axiosInstance";
 import CustomLoader from "@/utils/loader/loader";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React,{ useState } from "react";
 import { toast } from "react-toastify";
 export default function Recruiter() {
   const router = useRouter();
@@ -84,7 +84,9 @@ export default function Recruiter() {
                 </button>
               </div>
               <div className="flex flex-wrap justify-center gap-4">
-                <p className="text-center">Don't have any account?</p>
+                {/* <p className="text-center">Don't have any account?</p> */}
+                <p>Don&apos;t have any account?</p>
+
                 <button
                   className=" btn btn-danger"
                   onClick={() => router.push("/registration/recruiters")}

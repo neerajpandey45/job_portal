@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useEffect} from "react";
+import { useEffect} from "react";
 import { toast} from "react-toastify";
-const logoutUser = () => {
+const LogoutUser = () => {
   const router = useRouter();
   useEffect(() => {
     const handleLogout = () => {
@@ -17,4 +17,4 @@ const logoutUser = () => {
   return null;
 };
 
-export default logoutUser;
+export default LogoutUser;
