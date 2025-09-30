@@ -4,12 +4,14 @@ import CustomModal from "@/utils/customModel/customModel";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import EducationSection from "../fake/page";
+import Image from "next/image";
 const EditProfile = ({ action, profile, onclose,  editIndex, updateProfile }) => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [formData, setFormData] = useState({});
-  if (!action || !profile) return null;
+
   useEffect(() => {
+      if (!action || !profile) return;
     if (action === "profile") {
       setFormData({ summary: profile.summary });
     }
@@ -33,7 +35,8 @@ const EditProfile = ({ action, profile, onclose,  editIndex, updateProfile }) =>
     score: targetEdu.score || ""
   });
     }
-  }, [action, profile]);
+  }, [action, profile,editIndex]);
+    if (!action || !profile) return null;
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -56,12 +59,14 @@ const EditProfile = ({ action, profile, onclose,  editIndex, updateProfile }) =>
             }}
           />
           {preview && (
-            <img
-              src={preview}
-              alt="Preview"
-              className="w-[150px] h-[150px] rounded-full object-cover"
-            />
-          )}
+      <Image
+        src={preview}
+        alt="Preview"
+        width={150}
+        height={150}
+        className="rounded-full object-cover"
+  />
+)}
         </div>
       );
     }
