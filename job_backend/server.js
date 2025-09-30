@@ -23,18 +23,9 @@ const cookieParser=require("cookie-parser");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-// const allowedOrigins = [
-//  "https://job-portal-theta-lemon.vercel.app",
-//  ];
-// app.use(cors({
-//    origin: allowedOrigins, // Your frontend domain
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//  credentials: true, // 👈 allows cookies to be sent from frontend
-//  allowedHeaders: ["Authorization", "Content-Type"],
-// }));
-
 const allowedOrigins = [
- "https://job-portal-theta-lemon.vercel.app"
+ "https://job-portal-theta-lemon.vercel.app",
+ "http://localhost:3000",
 ];
 app.use(cors({
   origin: function(origin, callback) {
