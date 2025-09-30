@@ -32,6 +32,7 @@ const allowedOrigins = [
 // Middlewares
 app.use(cors({
   origin: allowedOrigins, // Your frontend domain
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true, // 👈 allows cookies to be sent from frontend
   allowedHeaders: ["Authorization", "Content-Type"],
 }));
