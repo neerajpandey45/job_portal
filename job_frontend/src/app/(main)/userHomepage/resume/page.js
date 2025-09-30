@@ -2,6 +2,8 @@
 import axiosInstance from "@/services/axiosInstance";
 import React, { useState, useEffect } from "react";
 import ResumeSidebar from "./sidebar";
+import Image from "next/image";
+
 const ResumePage = () => {
   const [profile, setProfile] = useState([]);
   useEffect(() => {
@@ -24,8 +26,19 @@ const ResumePage = () => {
         style={{ width: "794px", height: "1123px" }} // A4 size in px
       >
           <div className="flex justify-center">
-          <img
-            src={`http://192.168.142.43:5000${profile.profileImage}`}
+            <Image
+  src={`http://10.233.38.43:5000${profile.profileImage}`}
+  alt="profile"
+  width={50}       // required
+  height={50}      // required
+  style={{ 
+    objectFit: "fill", 
+    borderRadius: "50%" 
+  }}
+/>
+
+          {/* <img
+            src={`http://10.233.38.43:5000${profile.profileImage}`}
             alt="profile"
             style={{
               width: "50px",
@@ -33,7 +46,7 @@ const ResumePage = () => {
               objectFit: "fill",
               borderRadius: "50%",
             }}
-          />
+          /> */}
         </div>
        <div className="flex flex-col justify-center items-center border-b">
         <h6 >{profile.firstName} {profile.lastName}</h6>
@@ -41,7 +54,9 @@ const ResumePage = () => {
        </div>
        <div className="px-10 border-b">
         <h5>Profile</h5>
-        <p>{profile.summary}</p>
+        <p>{profile.summary?.replace(/'/g, "&apos;")}</p>
+
+        {/* <p>{profile.summary}</p> */}
        </div>
        <div className="px-10 border-b">
         {profile.education?.map((edu)=>(
@@ -66,7 +81,6 @@ const ResumePage = () => {
          <button className="btn btn-primary">Download</button>
        </div>
     </div>
-  
     </>
   );
 };
