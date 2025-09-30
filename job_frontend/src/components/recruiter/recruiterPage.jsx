@@ -1,7 +1,5 @@
 "use client";
-// import axios from "axios";
-import React, { useState } from "react";
-// import { toast } from "react-toastify";
+import React from "react";
 const RecruiterPage = () => {
   return (
     <div className="container-fluid h-screen bg-blue-300">
