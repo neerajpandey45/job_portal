@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const axiosInstance = axios.create({
    baseURL: process.env.NEXT_PUBLIC_API_URL,
   // baseURL: "http://job-portal-c0iw.onrender.com/api", // 🔁 Base URL for all requests
@@ -14,5 +13,4 @@ axiosInstance.interceptors.request.use((config) => {
 }, (error) => {
   return Promise.reject(error);
 });
-
 export default axiosInstance;

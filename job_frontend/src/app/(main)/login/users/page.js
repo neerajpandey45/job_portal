@@ -17,6 +17,7 @@ const UsersLogin = () => {
     };
     // console.log(data);
     try {
+         console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
       const res = await axiosInstance.post("/users/login", data);
         const { token, user } = res.data;
       localStorage.setItem("token", token);
