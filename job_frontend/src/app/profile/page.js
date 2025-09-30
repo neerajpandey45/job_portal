@@ -1,11 +1,10 @@
 // pages/profile.js or in useEffect of a component
+"use client";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-
 const Profile = () => {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) return;
