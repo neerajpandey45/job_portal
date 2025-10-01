@@ -34,7 +34,7 @@ const ModalPage = () => {
         {/* <p>{profile.profileImage}</p> */}
         <div className="flex justify-center">
           <img
-            src={`http://192.168.142.43:5000${profile.profileImage}`}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}${profile.profileImage}`}
             alt="profile"
             style={{
               width: "200px",

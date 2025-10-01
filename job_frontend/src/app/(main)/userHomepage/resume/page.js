@@ -37,17 +37,6 @@ const ResumePage = () => {
                 borderRadius: "50%",
               }}
             />
-
-            {/* <img
-            src={`http://10.233.38.43:5000${profile.profileImage}`}
-            alt="profile"
-            style={{
-              width: "50px",
-              height: "50px",
-              objectFit: "fill",
-              borderRadius: "50%",
-            }}
-          /> */}
           </div>
           <div className="flex flex-col justify-center items-center border-b">
             <h6>
@@ -58,8 +47,6 @@ const ResumePage = () => {
           <div className="px-10 border-b">
             <h5>Profile</h5>
             <p>{profile.summary?.replace(/'/g, "&apos;")}</p>
-
-            {/* <p>{profile.summary}</p> */}
           </div>
           <div className="px-10 border-b">
             {profile.education?.map((edu) => (

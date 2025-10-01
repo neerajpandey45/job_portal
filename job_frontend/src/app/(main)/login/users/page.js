@@ -15,23 +15,21 @@ const UsersLogin = () => {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    // console.log(data);
+
     try {
-         console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
       const res = await axiosInstance.post("/users/login", data);
-      console.log(res);
-        const { token, user } = res.data;
+
+      const { token, user } = res.data;
       localStorage.setItem("token", token);
       toast.success("Login successful!");
       setIsLoading(true);
       setTimeout(() => {
-       if(user.role==="admin"){
-        router.push("/login/admin")
-       }
-       else if(user.role==="user"){
-        router.push("/userHomepage");
-       }
-      },1000);
+        if (user.role === "admin") {
+          router.push("/login/admin");
+        } else if (user.role === "user") {
+          router.push("/userHomepage");
+        }
+      }, 1000);
     } catch (err) {
       if (err.response?.status === 404) {
         toast.error("User not found.");

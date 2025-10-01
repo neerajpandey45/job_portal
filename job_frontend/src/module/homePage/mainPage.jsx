@@ -16,7 +16,7 @@ const MainPage = () => {
     <div className="w-full flex flex-col flex-wrap">
       <div className="w-full bg-blue-300 py-5 p-3">
         <h1 className="text-3xl font-bold">Find Your Dream Job Today</h1>
-        <p className="text-gray-700">
+        <p className="text-black text-4xl md:text-xl">
           Explore thousands of verified job listings across industries and
           connect with top recruiters.
         </p>
@@ -24,7 +24,7 @@ const MainPage = () => {
       <section className="p-6 bg-white">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-3">Welcome to NPJob Portal</h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-black text-5xl md:text-lg ">
             We help you connect with companies hiring across India in fields
             like IT, Finance, Marketing, Design, and more. Create your profile,
             upload your resume, and apply with just one click.
@@ -32,17 +32,17 @@ const MainPage = () => {
         </div>
       </section>
      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-6xl mx-auto">
-        <div className="bg-gray-100 rounded-xl p-5 shadow">
-          <h3 className="text-xl font-semibold">💼 5000+ Verified Jobs</h3>
-          <p className="text-gray-600 mt-2">Browse jobs posted by top companies and startups across multiple industries.</p>
+        <div className="bg-gray-100 rounded-xl p-5 shadow min-h-[300px] text-center">
+          <h3 className="text-6xl mb-4">💼 5000+ Verified Jobs</h3>
+          <p className="text-gray-600 mt-2 text-6xl md:text-3xl">Browse jobs posted by top companies and startups across multiple industries.</p>
         </div>
         <div className="bg-gray-100 rounded-xl p-5 shadow">
           <h3 className="text-xl font-semibold">📄 One-Click Applications</h3>
-          <p className="text-gray-600 mt-2">Apply easily with your saved resume and profile in just a single click.</p>
+          <p className="text-gray-600 mt-2 text-6xl md:text-3xl">Apply easily with your saved resume and profile in just a single click.</p>
         </div>
         <div className="bg-gray-100 rounded-xl p-5 shadow">
           <h3 className="text-xl font-semibold">🚀 Personalized Recommendations</h3>
-          <p className="text-gray-600 mt-2">Get matched with jobs based on your skills, experience, and interests.</p>
+          <p className="text-gray-600 mt-2 text-6xl md:text-3xl">Get matched with jobs based on your skills, experience, and interests.</p>
         </div>
       </section>
       {/* Top Job Categories */}
@@ -51,7 +51,7 @@ const MainPage = () => {
           <h2 className="text-2xl font-bold mb-4">Top Job Categories</h2>
           <div className="flex flex-wrap gap-5">
           {categories.map((category,index)=>(
-            <div key={index} className="bg-gray-800 text-gray-100 px-4 py-2 rounded-full text-sm font-medium">
+            <div key={index} className="bg-gray-800 text-gray-100 px-4 py-2 rounded-full text-3xl font-medium">
               <span>{category}</span>
             </div>
           ))}
@@ -59,33 +59,33 @@ const MainPage = () => {
         </div>
       </section>
       {/* Platform Stats */}
-      <section className="bg-white py-8 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-          <div>
+      <section className="bg-indigo-200 py-8 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-4 md:grid-cols-4 gap-6 text-center">
+          <div className="">
             <h3 className="text-3xl font-bold text-blue-600">5K+</h3>
-            <p className="text-gray-500">Jobs Posted</p>
+            <p className="text-black text-4xl">Jobs Posted</p>
           </div>
           <div>
             <h3 className="text-3xl font-bold text-blue-600">10K+</h3>
-            <p className="text-gray-500">Registered Users</p>
+            <p className="text-black text-4xl">Registered Users</p>
           </div>
           <div>
             <h3 className="text-3xl font-bold text-blue-600">1K+</h3>
-            <p className="text-gray-500">Companies Hiring</p>
+            <p className="text-black text-4xl">Companies Hiring</p>
           </div>
           <div>
             <h3 className="text-3xl font-bold text-blue-600">4.9⭐</h3>
-            <p className="text-gray-500">User Rating</p>
+            <p className="text-black text-4xl">User Rating</p>
           </div>
         </div>
       </section>
       <div>
         <footer className="bg-gray-900 text-white mt-10">
-          <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-3 md:grid-cols-3 gap-6">
             {/* Column 1: Logo & About */}
             <div>
               <h2 className="text-2xl font-bold mb-2">NpJobPortal</h2>
-              <p className="text-sm text-gray-400">
+              <p className="text-2xl md:text-sm text-gray-400">
                 Your trusted platform for finding jobs, hiring talent, and
                 growing careers. Easy, reliable, and fast!
               </p>
@@ -94,7 +94,7 @@ const MainPage = () => {
             {/* Column 2: Quick Links */}
             <div>
               <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
-              <ul className="space-y-1 text-gray-300 text-sm">
+              <ul className="space-y-1 text-gray-300 text-4xl md:text-xl">
                 <li>
                   <a href="/" className="hover:text-blue-400">
                     Home
@@ -122,16 +122,16 @@ const MainPage = () => {
             <div>
               <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
               <div className="flex gap-4">
-                <a href="#" className="hover:text-blue-400 text-xl">
+                <a href="#" className="hover:text-blue-400 text-4xl">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="#" className="hover:text-blue-400 text-xl">
+                <a href="#" className="hover:text-blue-400 text-4xl">
                   <i className="bi bi-twitter"></i>
                 </a>
-                <a href="#" className="hover:text-blue-400 text-xl">
+                <a href="#" className="hover:text-blue-400 text-4xl">
                   <i className="bi bi-linkedin"></i>
                 </a>
-                <a href="#" className="hover:text-blue-400 text-xl">
+                <a href="#" className="hover:text-blue-400 text-4xl">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>

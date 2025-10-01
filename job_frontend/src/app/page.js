@@ -12,17 +12,17 @@ export default function Home() {
   };
   return (
     <div className="full w-max min-w-full">
-      <div className="flex justify-between px-4 py-2 bg-gray-800 text-white">
+      <div className="flex justify-between px-4 py-6 md:py-2 bg-gray-800 text-white ">
         <div className="flex gap-5">
-          <p className="cursor-pointer">Home</p>
+          <p className="cursor-pointer text-4xl">Home</p>
         </div>
-        <div className="flex gap-3">
-          <div className="flex gap-1">
+        <div className="flex gap-3 ">
+          <div className="flex gap-3">
             <button
-              className="btn btn-primary btn-sm border rounded-5 w-[80px]"
+              className="btn btn-primary btn-sm border rounded-5 min-w-[80px]"
               onClick={handleUser}
             >
-              login
+            <span className="text-4xl">login</span>
             </button>
             <button
               className="btn btn-danger border rounded-5"

@@ -27,10 +27,7 @@ const AllApplications = () => {
       return;
     }
     const resumeBase = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '');
-const fullURL = `${resumeBase}${resumePath}`;
-
-    // const fullURL=`${process.env.NEXT_PUBLIC_API_URL}${resumePath}`;
-    // const fullURL = `http://10.233.38.43:5000${resumePath}`;
+      const fullURL = `${resumeBase}${resumePath}`;
     window.open(fullURL, "_blank", "noopener,noreferrer");
   };
   // console.log(application)

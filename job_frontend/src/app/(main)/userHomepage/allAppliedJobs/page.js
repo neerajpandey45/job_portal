@@ -11,7 +11,6 @@ const UserAppliedJobs = () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axiosInstance.get("/applied-jobs/appliedAlljobs", {});
-        console.log("Fetched Applied Jobs:", res.data); // Add this
         setAppliedJobs(res.data);
       } catch (err) {
         console.error("Failed to fetch applied jobs", err);
