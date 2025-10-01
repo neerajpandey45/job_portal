@@ -24,7 +24,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
- "https://job-portal-theta-lemon.vercel.app",
+ "https://np-job-portal.vercel.app",
  "http://localhost:3000",
 ];
 app.use(cors({
