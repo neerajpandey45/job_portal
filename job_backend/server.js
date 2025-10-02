@@ -1,7 +1,7 @@
 // server.js
 const express = require("express");
 const dotenv = require("dotenv");
-const fs = require("fs");
+
 const path = require("path");
 const cors = require("cors");
 const { connectMongoDB } = require("./connection");
@@ -41,13 +41,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser()); 
 
-app.get("/api/list-profile-images", (req, res) => {
-  const folderPath = path.join(__dirname, "middlewares/uploads/profileImages");
-  fs.readdir(folderPath, (err, files) => {
-    if (err) return res.status(500).json({ error: "Cannot read folder" });
-    res.json({ files });
-  });
-});
+
 //  Routes for users 
 app.use("/api/users", userRouter);//for user 
 app.use("/api/alljobs",allJobsRoutes); // for user  see all posted job 
