@@ -7,6 +7,10 @@ exports.uploadProfileImage = async (req, res) => {
     
     const userId = req.userId;
     const fileName = req.file.filename;
+         if (!req.fileName) {
+      console.log("No file received");
+      return res.status(400).json({ error: "No file uploaded" });
+    }
     // const imagePath = `/middlewares/uploads/profileImages/${fileName}`;
     const imagePath = `/profileImages/${fileName}`;
 
