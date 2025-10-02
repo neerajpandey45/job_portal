@@ -4,6 +4,7 @@ const User = require("../../models/users/user");
 
 exports.uploadProfileImage = async (req, res) => {
   try {
+    
     const userId = req.userId;
     const fileName = req.file.filename;
     // const imagePath = `/middlewares/uploads/profileImages/${fileName}`;
