@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
    profileImage: {
+    // data: Buffer,       // store binary data
+    // contentType: String // store file type
     type: String,
     default: "", // Optional: default empty path
   },
