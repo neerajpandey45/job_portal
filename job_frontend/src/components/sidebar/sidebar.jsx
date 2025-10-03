@@ -5,7 +5,6 @@ import { useTheme } from "@/utils/screenTheme/themeContext";
 const Sidebar = ({ setOpenSide }) => {
   const {isDark,toggleTheme}=useTheme(false);
   const [openMenu, setOpenMenu] = useState(false);
-  console.log(isDark);
   return (
     <div className="w-full flex flex-wrap ">
       <div className="w-full md:w-[20vw] min-h-[100vh] shadow p-3 cursor-pointer ">

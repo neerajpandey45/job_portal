@@ -35,129 +35,139 @@ const Jobform = () => {
     }
   };
   return (
-    <div className="container-fluid">
-      <div className="row justify-content-center align-items-center">
-        <div className="col-12">
-          <h3 className="text-center py-2">Upload jobs form</h3>
-          <form className="bg-white shadow mt-[5%]" onSubmit={handleSubmit}>
-            <div className="row mb-2">
-              <div className="col-6 space-y-2 px-5">
-                <label htmlFor="">job title</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="enter job title"
-                  className="w-full border border-black rounded-3 ps-1"
-                  style={{ height: "35px" }}
-                />
-              </div>
-              <div className="col-6 space-y-2 px-5">
-                <label htmlFor="">companyName</label>
-                <input
-                  type="text"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  placeholder="company name"
-                  className="w-full border border-black rounded-3 ps-1"
-                  style={{ height: "35px" }}
-                />
-              </div>
+    <div className="w-full flex justify-center px-4">
+      <div className="w-full max-w-5xl">
+        <h3 className="text-center py-4 text-lg md:text-xl font-semibold">
+          Upload Jobs Form
+        </h3>
+        <form
+          className="bg-white shadow rounded-md p-3 space-y-4"
+          onSubmit={handleSubmit}
+        >
+          {/* Title + Company */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <label>Job Title</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Enter job title"
+                className="w-full border border-gray-400 rounded-md px-2 h-9"
+              />
             </div>
-            <div className="row mb-2">
-              <div className="col-6 px-5">
-                <label htmlFor="">job location</label>
-                <input
-                  type="text"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  placeholder="enter job location"
-                  className="w-full border border-black rounded-3 ps-1"
-                  style={{ height: "35px" }}
-                />
-              </div>
-              <div className="col-6 px-5">
-                <label>Stipend</label>
-                <input
-                  type="text"
-                  name="salary"
-                  value={formData.salary}
-                  onChange={handleChange}
-                  placeholder="stipend"
-                  className="w-full border border-black rounded-3 ps-1"
-                  style={{ height: "35px" }}
-                />
-              </div>
+            <div className="flex flex-col">
+              <label>Company Name</label>
+              <input
+                type="text"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+                placeholder="Company name"
+                className="w-full border border-gray-400 rounded-md px-2 h-9"
+              />
             </div>
-            <div className="row mb-2">
-              <div className="col-6 px-5">
-                <label htmlFor="">experience</label>
-                <input
-                  type="text"
-                  name="experience"
-                  value={formData.experience}
-                  onChange={handleChange}
-                  placeholder="enter require experience"
-                  className="w-full border border-black rounded-3 ps-1"
-                  style={{ height: "35px" }}
-                />
-              </div>
-              <div className="col-6 px-5">
-                <label>jobType</label>
-                <input
-                  type="text"
-                  name="jobType"
-                  value={formData.jobType}
-                  onChange={handleChange}
-                  placeholder="enter job type"
-                  className="w-full border border-black rounded-3 ps-1"
-                  style={{ height: "35px" }}
-                />
-              </div>
+          </div>
+
+          {/* Location + Stipend */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <label>Job Location</label>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="Enter job location"
+                className="w-full border border-gray-400 rounded-md px-2 h-9"
+              />
             </div>
-            <div className="row mb-2">
-              <div className="col-6 px-5">
-                <label htmlFor="">skills</label>
-                <textarea
-                  name="skills"
-                  value={formData.skills}
-                  onChange={handleChange}
-                  placeholder="require skills"
-                  className="w-full border border-black rounded-3 ps-1"
-                ></textarea>
-              </div>
-               <div className="col-6 px-5">
-                <label htmlFor="">descriptions</label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="descriptions"
-                  className="w-full border border-black rounded-3 ps-1"
-                ></textarea>
-              </div>
+            <div className="flex flex-col">
+              <label>Stipend</label>
+              <input
+                type="text"
+                name="salary"
+                value={formData.salary}
+                onChange={handleChange}
+                placeholder="Stipend"
+                className="w-full border border-gray-400 rounded-md px-2 h-9"
+              />
             </div>
-             <div className="row mb-2">
-              <div className="col-12 px-5">
-                <label htmlFor="">full Descriptions</label>
-                <textarea
-                  name="fullDescriptions"
-                  value={formData.fullDescriptions}
-                  onChange={handleChange}
-                  placeholder="full descriptions"
-                  className="w-full border border-black rounded-3 ps-1"
-                    style={{height:"auto"}}
-                ></textarea>
-              </div>
-               </div>
-            <div className="w-full flex justify-center">
-              <button className="btn btn-primary mb-2">post job</button>
+          </div>
+
+          {/* Experience + Job Type */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <label>Experience</label>
+              <input
+                type="text"
+                name="experience"
+                value={formData.experience}
+                onChange={handleChange}
+                placeholder="Required experience"
+                className="w-full border border-gray-400 rounded-md px-2 h-9"
+              />
             </div>
-          </form>
-        </div>
+            <div className="flex flex-col">
+              <label>Job Type</label>
+              <input
+                type="text"
+                name="jobType"
+                value={formData.jobType}
+                onChange={handleChange}
+                placeholder="Enter job type"
+                className="w-full border border-gray-400 rounded-md px-2 h-9"
+              />
+            </div>
+          </div>
+
+          {/* Skills + Short Description */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <label>Skills</label>
+              <textarea
+                name="skills"
+                value={formData.skills}
+                onChange={handleChange}
+                placeholder="Required skills"
+                className="w-full border border-gray-400 rounded-md px-2 py-1"
+                rows={3}
+              ></textarea>
+            </div>
+            <div className="flex flex-col">
+              <label>Short Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Job description"
+                className="w-full border border-gray-400 rounded-md px-2 py-1 resize-none overflow-hidden"
+                rows={3}
+              ></textarea>
+            </div>
+          </div>
+
+          {/* Full Description */}
+          <div className="flex flex-col">
+            <label>Full Description</label>
+            <textarea
+              name="fullDescriptions"
+              value={formData.fullDescriptions}
+              onChange={handleChange}
+              placeholder="Full job description"
+              className="w-full border border-gray-400 rounded-md px-2 py-1"
+              rows={5}
+            ></textarea>
+          </div>
+
+          {/* Submit */}
+          <div className="flex justify-center">
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700">
+              Post Job
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

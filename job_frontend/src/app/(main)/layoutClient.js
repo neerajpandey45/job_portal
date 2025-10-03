@@ -27,7 +27,7 @@ const UserLayout = ({ children }) => {
       try {
         const res = await axiosInstance.get("/users/check");
         if (res.status === 200 && res.data.authenticated) {
-          console.log("✅ Authenticated successfully.");
+          // console.log("✅ Authenticated successfully.");
           setIsAuthenticated(true);
         } else {
           router.replace("/login/users");

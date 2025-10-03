@@ -3,15 +3,13 @@ import {
   EditSkill,
 } from "@/components/resumeEdit/resumeEditForm";
 import React, { useState } from "react";
-
 const ResumeSidebar = () => {
   const [index, setIndex] = useState("");
   const handleEdit = (active) => {
     setIndex((prev) => (prev === active ? "" : active));
   };
-  console.log(index);
   return (
-    <div className="bg-white shadow w-[45vw] mx-4 pt-5">
+    <div className="bg-white shadow w-full md:w-[45vw] px-2 pt-4 md:mx-4">
       <ul className="space-y-5">
         <div>
           <div className="flex justify-between">

@@ -3,13 +3,13 @@ import axiosInstance from "@/services/axiosInstance";
 import React, { useState, useEffect } from "react";
 import ResumeSidebar from "./sidebar";
 import Image from "next/image";
-
 const ResumePage = () => {
   const [profile, setProfile] = useState([]);
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const res = await axiosInstance.get("/users/FullDetails");
+        // console.log("user data ",res.data)
         setProfile(res.data);
       } catch (err) {
         console.log("err", err);
@@ -19,23 +19,24 @@ const ResumePage = () => {
   }, []);
   return (
     <>
-      <div className="w-full flex gap-20 bg-gray-100 py-10">
+      <div className="w-full flex flex-col md:flex-row gap-10 bg-gray-300 py-10 mx-auto">
         <ResumeSidebar />
+        <div className="w-full flex flex-col">
         <div
-          className="bg-white shadow border rounded-md py-5"
-          style={{ width: "794px", height: "1123px" }} // A4 size in px
+        className="bg-white shadow border rounded-md py-5 mx-auto
+               w-full max-w-[794px] min-h-[1123px] md:h-[1123px]"
         >
           <div className="flex justify-center">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}${profile.profileImage}`}
-              // src={`http://10.233.38.43:5000${profile.profileImage}`}
+              src={
+                profile.profileImage
+                  ? `${process.env.NEXT_PUBLIC_BASE_URL}${profile.profileImage}`
+                  : "/default-profile.png"
+              }
               alt="profile"
-              width={50} // required
-              height={50} // required
-              style={{
-                objectFit: "fill",
-                borderRadius: "50%",
-              }}
+              width={50}
+              height={50}
+              style={{ objectFit: "fill", borderRadius: "50%" }}
             />
           </div>
           <div className="flex flex-col justify-center items-center border-b">
@@ -66,10 +67,12 @@ const ResumePage = () => {
             ))}
           </div>
         </div>
-        <div className="mr-5">
+       <div className="w-full flex justify-center mt-2">
           <button className="btn btn-primary">Download</button>
         </div>
+        </div>
       </div>
+       
     </>
   );
 };

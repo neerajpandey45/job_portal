@@ -18,15 +18,10 @@ const JobCard = () => {
     };
     fetchJobs();
   }, []);
-  console.log(jobs);
-
-  // ✅ Delete han
-  // dler
   const handleDelete = async (jobId) => {
     try {
       const res = await axiosInstance.delete(
         `/recruiter/delete/${jobId}`
-        // { withCredentials: true }
       );
       setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
       toast.success("Deleted successfully");
@@ -34,7 +29,6 @@ const JobCard = () => {
       console.log("Delete error:", err);
     }
   };
-
   return (
     <div
       className="w-full h-[90vh] overflow-y-scroll  py-2 p-2"

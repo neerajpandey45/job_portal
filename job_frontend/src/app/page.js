@@ -24,14 +24,15 @@ export default function Home() {
             >
             <span className="text-4xl">login</span>
             </button>
-            <button
-              className="btn btn-danger border rounded-5"
-              onClick={() => router.push("/registration/user")}
-            >
-              register
-            </button>
           </div>
-          <button className="btn btn-success btn-sm border rounded-5 w-[80px]" onClick={handleRecruiter}>recruiter</button>
+     
+          <button className="btn btn-success btn-sm border rounded-5" onClick={handleRecruiter}>
+
+           <span className="text-4xl"> recruiter</span>
+           
+            </button>
+
+         
         </div>
       </div>
       <MainPage/>

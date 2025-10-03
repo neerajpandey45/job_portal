@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import Link from "next/link";
 import axiosInstance from "@/services/axiosInstance";
 import CustomLoader from "@/utils/loader/loader";
 const UsersLogin = () => {
@@ -18,7 +19,6 @@ const UsersLogin = () => {
 
     try {
       const res = await axiosInstance.post("/users/login", data);
-
       const { token, user } = res.data;
       localStorage.setItem("token", token);
       toast.success("Login successful!");
@@ -107,6 +107,17 @@ const UsersLogin = () => {
                   onClick={() => router.push("/resetPassword")}
                 >
                   Forgot password?
+                </p>
+              </div>
+              <div className="flex justify-center mt-4">
+                <p className="text-gray-700">
+                  Don&apos;t have an account?{" "}
+                  <Link
+                    href="/registration/user"
+                    className="text-blue-500 hover:underline font-semibold"
+                  >
+                    Signup
+                  </Link>
                 </p>
               </div>
             </form>
