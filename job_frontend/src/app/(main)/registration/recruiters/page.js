@@ -89,9 +89,9 @@ const RecruiterRegistration = () => {
                   <label htmlFor="">company name</label>
                   <input
                     type="text"
-                    {...register("companyName",{
-                      required:"name is required",
-                      validate:validateName
+                    {...register("companyName", {
+                      required: "name is required",
+                      validate: validateName,
                     })}
                     placeholder="campany name"
                     className="w-full border border-black rounded-2 outline-none p-1"
@@ -122,13 +122,23 @@ const RecruiterRegistration = () => {
                   <label htmlFor="">pincode</label>
                   <input
                     type="text"
-                    {...register("pincode",
-                      { required: "Pincode is required",
-                    pattern: {
-                       value: /^[1-9][0-9]{5}$/, // Indian pincode pattern
+                    inputMode="numeric"
+                    pattern="\d*"
+                    {...register("pincode", {
+                      required: "Pincode is required in numeric",
+                      pattern: {
+                        value: /^[1-9][0-9]{5}$/, // Indian pincode pattern
                         message: "Enter a valid 6-digit pincode",
-                           }}
-                    )}
+                      },
+                    })}
+                    onKeyDown={(e) => {
+                      if (!/[0-9]/.test(e.key) && e.key !== "Backspace"
+                      && e.key!=="Tab"
+
+                    ) {
+                        e.preventDefault(); // block anything that's not a digit
+                      }
+                    }}
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
                   {errors.pincode && (
