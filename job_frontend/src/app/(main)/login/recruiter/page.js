@@ -84,7 +84,6 @@ export default function Recruiter() {
                 </button>
               </div>
               <div className="flex flex-wrap justify-center gap-4">
-                {/* <p className="text-center">Don't have any account?</p> */}
                 <p>Don&apos;t have any account?</p>
 
                 <button
@@ -94,6 +93,7 @@ export default function Recruiter() {
                   Create Account
                 </button>
               </div>
+             
             </form>
           </div>
         </div>

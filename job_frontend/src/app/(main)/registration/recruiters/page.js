@@ -4,20 +4,25 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import {
+  validateName,
+  validateEmail,
+  validatePassword,
+} from "@/utils/formValidation.js/formValidation";
 const RecruiterRegistration = () => {
-  const router=useRouter();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
   const [serverError, setServerError] = useState("");
   const [showPass, setShowPass] = useState(false);
   const onSubmit = async (data) => {
-      if(data.password!=data.confirmPassword){
-        return toast.error("Password != ConfirmPassword");
-      }
+    if (data.password != data.confirmPassword) {
+      return toast.error("Password != ConfirmPassword");
+    }
     setServerError("");
     try {
       const res = await axiosInstance.post("/recruiters/register", {
@@ -31,7 +36,7 @@ const RecruiterRegistration = () => {
         password: data.password,
         confirmPassword: data.confirmPassword,
       });
-      toast.success("Registration is sucessfull")
+      toast.success("Registration is sucessfull");
       reset(); // Clear form
       setTimeout(() => {
         router.push("/login/recruiter");
@@ -54,19 +59,26 @@ const RecruiterRegistration = () => {
                   <label htmlFor="">first name</label>
                   <input
                     type="text"
-                    {...register("firstName")}
+                    {...register("firstName", {
+                      required: "first name is required",
+                      validate: validateName,
+                    })}
                     placeholder="first name"
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
                   {errors.firstName && (
-                    <p className="text-red-500 text-xs">{errors.firstName.message}</p>
+                    <p className="text-red-500 text-xs">
+                      {errors.firstName.message}
+                    </p>
                   )}
                 </div>
                 <div className="col-12 col-md-6 space-y-2">
                   <label htmlFor="">last name</label>
                   <input
                     type="text"
-                    {...register("lastName")}
+                    {...register("lastName", {
+                      validate: validateName,
+                    })}
                     placeholder="last name"
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
@@ -77,12 +89,17 @@ const RecruiterRegistration = () => {
                   <label htmlFor="">company name</label>
                   <input
                     type="text"
-                    {...register("companyName")}
+                    {...register("companyName",{
+                      required:"name is required",
+                      validate:validateName
+                    })}
                     placeholder="campany name"
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
-                   {errors.companyName && (
-                    <p className="text-red-500 text-xs">{errors.companyName.message}</p>
+                  {errors.companyName && (
+                    <p className="text-red-500 text-xs">
+                      {errors.companyName.message}
+                    </p>
                   )}
                 </div>
                 <div className="col-12 col-md-6 space-y-2">
@@ -93,8 +110,10 @@ const RecruiterRegistration = () => {
                     placeholder="location"
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
-                   {errors.location && (
-                    <p className="text-red-500 text-xs">{errors.location.message}</p>
+                  {errors.location && (
+                    <p className="text-red-500 text-xs">
+                      {errors.location.message}
+                    </p>
                   )}
                 </div>
               </div>
@@ -103,11 +122,19 @@ const RecruiterRegistration = () => {
                   <label htmlFor="">pincode</label>
                   <input
                     type="text"
-                    {...register("pincode")}
+                    {...register("pincode",
+                      { required: "Pincode is required",
+                    pattern: {
+                       value: /^[1-9][0-9]{5}$/, // Indian pincode pattern
+                        message: "Enter a valid 6-digit pincode",
+                           }}
+                    )}
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
-                   {errors.pincode && (
-                    <p className="text-red-500 text-xs">{errors.pincode.message}</p>
+                  {errors.pincode && (
+                    <p className="text-red-500 text-xs">
+                      {errors.pincode.message}
+                    </p>
                   )}
                 </div>
                 <div className="col-12 col-md-6 space-y-2">
@@ -119,7 +146,9 @@ const RecruiterRegistration = () => {
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
                   {errors.state && (
-                    <p className="text-red-500 text-xs">{errors.state.message}</p>
+                    <p className="text-red-500 text-xs">
+                      {errors.state.message}
+                    </p>
                   )}
                 </div>
               </div>
@@ -127,13 +156,18 @@ const RecruiterRegistration = () => {
                 <div className="col-12  space-y-2">
                   <label htmlFor="">email</label>
                   <input
-                    {...register("email", { required: "email is required" })}
+                    {...register("email", {
+                      required: "email is required",
+                      validate: validateEmail,
+                    })}
                     type="email"
                     placeholder="email"
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
-                   {errors.email && (
-                    <p className="text-red-500 text-xs">{errors.email.message}</p>
+                  {errors.email && (
+                    <p className="text-red-500 text-xs">
+                      {errors.email.message}
+                    </p>
                   )}
                 </div>
               </div>
@@ -144,6 +178,7 @@ const RecruiterRegistration = () => {
                     type={showPass ? "Text" : "password"}
                     {...register("password", {
                       required: "password is required",
+                      validate: validatePassword,
                     })}
                     placeholder="enter password"
                     className="w-full border border-black rounded-2 outline-none p-1"
@@ -167,8 +202,10 @@ const RecruiterRegistration = () => {
                     placeholder="confirm passowrd"
                     className="w-full border border-black rounded-2 outline-none p-1"
                   />
-                  {errors.confirmPassword&& (
-                    <p className="text-red-500">{errors.confirmPassword.message}</p>
+                  {errors.confirmPassword && (
+                    <p className="text-red-500">
+                      {errors.confirmPassword.message}
+                    </p>
                   )}
                 </div>
               </div>
